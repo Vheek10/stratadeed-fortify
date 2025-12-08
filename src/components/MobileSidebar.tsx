@@ -2,16 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-	X,
-	Rocket,
-	Home,
-	Info,
-	Building,
-	Users,
-	Briefcase,
-	Phone,
-} from "lucide-react";
+import { X, Home, Info, Building, Users, Briefcase, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // Icon mapping for navigation items
@@ -119,9 +110,8 @@ export default function MobileSidebar({
 							<div className="space-y-3">
 								<Link
 									href="/signup"
-									className="flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-500 dark:to-blue-400 text-white text-sm font-medium hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 rounded-full"
+									className="flex items-center justify-center px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-blue-600/40 rounded-lg"
 									onClick={onClose}>
-									<Rocket className="w-4 h-4" />
 									Sign Up
 								</Link>
 							</div>

@@ -7,7 +7,6 @@ import { usePathname } from "next/navigation";
 import {
 	Menu,
 	X,
-	Rocket,
 	Home,
 	Info,
 	Building,
@@ -93,12 +92,11 @@ export default function Navbar() {
 
 				<div className="relative mx-auto w-full max-w-screen-2xl">
 					<div className="flex items-center justify-between h-16 lg:h-20">
-						{/* Left Section: Mobile Menu Button + Logo */}
-						<div className="flex items-center gap-3 lg:gap-4 flex-shrink-0">
-							{/* Mobile Menu Button */}
+						{/* Left Section: Mobile Menu Button (only on mobile) */}
+						<div className="flex lg:hidden items-center flex-shrink-0">
 							<button
 								onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-								className="lg:hidden p-2 text-gray-300 hover:text-blue-400 transition-all duration-300 hover:scale-110"
+								className="p-2 text-gray-300 hover:text-blue-400 transition-all duration-300 hover:scale-110"
 								aria-label="Toggle menu"
 								aria-expanded={isMobileMenuOpen}>
 								{isMobileMenuOpen ? (
@@ -107,8 +105,10 @@ export default function Navbar() {
 									<Menu className="w-5 h-5" />
 								)}
 							</button>
+						</div>
 
-							{/* Logo Section */}
+						{/* Center: Logo (centered on mobile/tablet, left on desktop) */}
+						<div className="lg:flex items-center gap-3 lg:gap-4 flex-shrink-0 absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0">
 							<Link
 								href="/"
 								className="flex items-center gap-3 group"
@@ -120,7 +120,7 @@ export default function Navbar() {
 										</span>
 									</div>
 								</div>
-								<div className="flex flex-col">
+								<div className="hidden lg:flex flex-col">
 									<span className="text-xl lg:text-2xl xl:text-3xl font-bold bg-gradient-to-r from-white via-blue-300 to-cyan-400 bg-clip-text text-transparent leading-tight tracking-tight">
 										StrataDeed
 									</span>
@@ -184,12 +184,9 @@ export default function Navbar() {
 							<div className="flex lg:hidden items-center">
 								<Link
 									href="/signup"
-									className="group px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-400 text-white text-sm font-medium rounded-full shadow-lg shadow-blue-400/10 hover:shadow-xl hover:shadow-blue-400/20 hover:scale-105 active:scale-95 transition-all duration-300">
-									<span className="flex items-center gap-1.5">
-										<Rocket className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform" />
-										<span className="hidden sm:inline">Sign Up</span>
-										<span className="sm:hidden">Join</span>
-									</span>
+									className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-blue-600/40">
+									<span className="hidden sm:inline">Sign Up</span>
+									<span className="sm:hidden">Join</span>
 								</Link>
 							</div>
 
@@ -197,11 +194,8 @@ export default function Navbar() {
 							<div className="hidden lg:flex items-center">
 								<Link
 									href="/signup"
-									className="group px-5 py-2.5 xl:px-6 bg-gradient-to-r from-blue-500 to-cyan-400 text-white text-sm font-medium rounded-full shadow-lg shadow-blue-400/10 hover:shadow-xl hover:shadow-blue-400/20 hover:scale-105 active:scale-95 transition-all duration-300">
-									<span className="flex items-center gap-2">
-										<Rocket className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-										Sign Up
-									</span>
+									className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-blue-600/40">
+									Sign Up
 								</Link>
 							</div>
 						</div>

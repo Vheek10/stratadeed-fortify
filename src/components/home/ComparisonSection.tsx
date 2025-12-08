@@ -1,116 +1,159 @@
 /** @format */
 "use client";
 
-import { Building, TrendingUp, Layers } from "lucide-react";
+import { useState } from "react";
+import Image from "next/image";
+import { CheckCircle, XCircle, ArrowRight } from "lucide-react";
 
 const comparisons = [
 	{
-		icon: Building,
-		title: "Land & House Listings",
-		items: [
-			"Simple listings with slow verification",
-			"Zero liquidity",
-			"Manual processes",
+		title: "Traditional",
+		features: [
+			{ text: "Slow & manual", good: false },
+			{ text: "Paper-heavy", good: false },
+			{ text: "Local only", good: false },
 		],
-		variant: "traditional" as const,
+		image:
+			"https://images.unsplash.com/photo-1558036117-15e82a2c9a9a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+		color: "red",
 	},
 	{
-		icon: TrendingUp,
-		title: "Real Estate Tokens (Unregulated)",
-		items: [
-			"High hype, weak fundamentals",
-			"Unclear rights",
-			"Unregulated processes",
+		title: "Speculative",
+		features: [
+			{ text: "High risk", good: false },
+			{ text: "No verification", good: false },
+			{ text: "Unregulated", good: false },
 		],
-		variant: "speculative" as const,
+		image:
+			"https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+		color: "orange",
 	},
 	{
-		icon: Layers,
 		title: "StrataDeed",
-		items: [
-			"Legal-backed digital deeds",
-			"Regulated processes",
-			"Verifiable ownership",
-			"Transparent lifecycle",
-			"Real value",
+		features: [
+			{ text: "Verified ownership", good: true },
+			{ text: "Blockchain-backed", good: true },
+			{ text: "Global access", good: true },
 		],
-		variant: "stratadeed" as const,
+		image:
+			"https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+		color: "blue",
 	},
 ];
 
 export default function ComparisonSection() {
+	const [active, setActive] = useState(2);
+
 	return (
-		<section className="py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
-			<div className="max-w-7xl mx-auto">
-				<div className="text-center mb-16">
-					<h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-						Not Traditional. Not Speculative.{" "}
-						<span className="bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-blue-400 dark:to-cyan-400 bg-clip-text text-transparent">
-							Something Real.
-						</span>
+		<section className="py-20 px-4 sm:px-6 lg:px-8">
+			<div className="max-w-6xl mx-auto">
+				<div className="text-center mb-12">
+					<h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+						The Evolution of Real Estate
 					</h2>
+					<p className="text-lg text-gray-600 dark:text-gray-400">
+						From traditional to transformative
+					</p>
 				</div>
 
-				<div className="grid lg:grid-cols-3 gap-8">
-					{comparisons.map((comparison) => {
-						const Icon = comparison.icon;
-						const isStratadeed = comparison.variant === "stratadeed";
+				{/* Comparison Timeline */}
+				<div className="relative mb-16">
+					{/* Timeline Line */}
+					<div className="absolute left-0 right-0 top-1/2 h-0.5 bg-gradient-to-r from-red-400 via-orange-400 to-blue-400 transform -translate-y-1/2 z-0" />
 
-						return (
-							<div
-								key={comparison.title}
-								className={`${
-									isStratadeed
-										? "bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-2xl p-8 border-2 border-blue-200 dark:border-blue-800 relative overflow-hidden"
-										: "bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800"
-								}`}>
-								{isStratadeed && (
-									<div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-full -translate-y-16 translate-x-16" />
-								)}
-								<div
-									className={`flex items-center gap-3 mb-6 ${
-										isStratadeed ? "relative z-10" : ""
-									}`}>
-									<Icon
-										className={`w-6 h-6 ${
-											isStratadeed
-												? "text-blue-600 dark:text-blue-400"
-												: "text-gray-500 dark:text-gray-400"
-										}`}
-									/>
-									<h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-										{comparison.title}
-									</h3>
-								</div>
-								<ul
-									className={`space-y-3 ${
-										isStratadeed ? "relative z-10" : ""
-									}`}>
-									{comparison.items.map((item) => (
-										<li
-											key={item}
-											className="flex items-start gap-2">
-											<div
-												className={`w-1.5 h-1.5 rounded-full mt-2 ${
-													isStratadeed
-														? "bg-blue-600 dark:bg-blue-400"
-														: "bg-gray-400"
-												}`}
+					{/* Timeline Points */}
+					<div className="relative flex justify-between z-10">
+						{comparisons.map((item, index) => {
+							const isActive = active === index;
+
+							return (
+								<button
+									key={index}
+									onClick={() => setActive(index)}
+									className="relative flex flex-col items-center group">
+									{/* Circle */}
+									<div
+										className={`w-12 h-12 rounded-full flex items-center justify-center mb-4 transition-all ${
+											isActive
+												? "bg-gradient-to-r from-blue-600 to-cyan-500 scale-125 shadow-lg"
+												: `bg-${item.color}-500/20 hover:scale-110`
+										}`}>
+										<div className="w-8 h-8 rounded-full overflow-hidden">
+											<Image
+												src={item.image}
+												alt={item.title}
+												width={32}
+												height={32}
+												className="object-cover w-full h-full"
 											/>
-											<span
-												className={
-													isStratadeed
-														? "text-gray-900 dark:text-white font-medium"
-														: "text-gray-600 dark:text-gray-400"
-												}>
-												{item}
-											</span>
-										</li>
-									))}
-								</ul>
+										</div>
+									</div>
+
+									{/* Label */}
+									<span
+										className={`font-semibold ${
+											isActive
+												? "text-blue-600 dark:text-blue-400"
+												: "text-gray-600 dark:text-gray-400"
+										}`}>
+										{item.title}
+									</span>
+								</button>
+							);
+						})}
+					</div>
+				</div>
+
+				{/* Active Comparison Display */}
+				<div className="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/10 dark:to-cyan-900/10 rounded-2xl p-8">
+					<div className="flex flex-col lg:flex-row items-center gap-8">
+						{/* Image */}
+						<div className="lg:w-1/3">
+							<div className="aspect-square rounded-xl overflow-hidden shadow-lg">
+								<Image
+									src={comparisons[active].image}
+									alt={comparisons[active].title}
+									width={400}
+									height={400}
+									className="object-cover w-full h-full"
+								/>
 							</div>
-						);
-					})}
+						</div>
+
+						{/* Content */}
+						<div className="lg:w-2/3">
+							<h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+								{comparisons[active].title} Approach
+							</h3>
+
+							<div className="space-y-4 mb-8">
+								{comparisons[active].features.map((feature, i) => (
+									<div
+										key={i}
+										className="flex items-center gap-3">
+										<div
+											className={`p-2 rounded-lg ${
+												feature.good ? "bg-emerald-500/20" : "bg-red-500/20"
+											}`}>
+											{feature.good ? (
+												<CheckCircle className="w-5 h-5 text-emerald-500" />
+											) : (
+												<XCircle className="w-5 h-5 text-red-500" />
+											)}
+										</div>
+										<span className="text-lg">{feature.text}</span>
+									</div>
+								))}
+							</div>
+
+							{active === 2 && (
+								<button className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+									<span>Get Started</span>
+									<ArrowRight className="w-5 h-5" />
+								</button>
+							)}
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>
