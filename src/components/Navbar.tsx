@@ -20,11 +20,9 @@ import { cn } from "@/lib/utils";
 // Icon mapping for navigation items
 const navIcons = {
 	home: Home,
-	"about-us": Info,
-	"for-investors": Briefcase,
-	"for-developers": Building,
-	company: Users,
-	"contact-us": Phone,
+	about: Info,
+	marketplace: Building,
+	dashboard: Briefcase,
 };
 
 export default function Navbar() {
@@ -34,11 +32,9 @@ export default function Navbar() {
 
 	const navItems = [
 		{ href: "/", label: "Home", key: "home" },
-		{ href: "/about-us", label: "About Us", key: "about-us" },
-		{ href: "/for-investors", label: "For Investors", key: "for-investors" },
-		{ href: "/for-developers", label: "For Developers", key: "for-developers" },
-		{ href: "/company", label: "Company", key: "company" },
-		{ href: "/contact-us", label: "Contact Us", key: "contact-us" },
+		{ href: "/about", label: "About", key: "about" },
+		{ href: "/marketplace", label: "Marketplace", key: "marketplace" },
+		{ href: "/dashboard", label: "Dashboard", key: "dashboard" },
 	];
 
 	useEffect(() => {

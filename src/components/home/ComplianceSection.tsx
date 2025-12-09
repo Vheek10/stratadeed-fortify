@@ -12,6 +12,8 @@ import {
 	Zap,
 	Database,
 	Building,
+	TrendingUp,
+	Target,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -75,15 +77,28 @@ const complianceFeatures = [
 	},
 ];
 
-const performanceMetrics = [
-	{ icon: Zap, label: "Transaction Speed", value: "< 2s" },
-	{ icon: CheckCircle, label: "Verification Rate", value: "100%" },
-	{ icon: Users, label: "Countries Covered", value: "45+" },
-	{ icon: Lock, label: "Security Uptime", value: "99.99%" },
-];
-
 export default function ComplianceSection() {
 	const [activeFeature, setActiveFeature] = useState(0);
+	const [progressAnimations, setProgressAnimations] = useState({
+		transactionSpeed: 0,
+		verificationRate: 0,
+		globalReach: 0,
+		securityUptime: 0,
+	});
+
+	useEffect(() => {
+		// Animate progress bars when component mounts
+		const timer = setTimeout(() => {
+			setProgressAnimations({
+				transactionSpeed: 95,
+				verificationRate: 100,
+				globalReach: 90,
+				securityUptime: 99.9,
+			});
+		}, 300);
+
+		return () => clearTimeout(timer);
+	}, []);
 
 	const currentImage =
 		REAL_ESTATE_IMAGES[complianceFeatures[activeFeature].imageIndex];
@@ -231,33 +246,90 @@ export default function ComplianceSection() {
 					</div>
 				</div>
 
-				{/* Performance Metrics */}
-				<div className="mb-12">
-					<div className="text-center mb-8">
-						<h3 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-3">
+				{/* Performance Metrics - Animated */}
+				<div className="mb-16">
+					<div className="text-center mb-12">
+						<h3 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
 							Industry-Leading Performance
 						</h3>
-						<p className="text-gray-600 dark:text-gray-400">
-							Setting new standards in real estate technology
+						<p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+							Setting new standards with measurable results across every metric
 						</p>
 					</div>
 
-					<div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-						{performanceMetrics.map((metric, index) => {
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+						{[
+							{
+								icon: Zap,
+								label: "Transaction Speed",
+								value: "< 2s",
+								description: "Average processing time",
+								color: "blue",
+								progress: progressAnimations.transactionSpeed,
+							},
+							{
+								icon: CheckCircle,
+								label: "Verification Rate",
+								value: "100%",
+								description: "Successful document verification",
+								color: "emerald",
+								progress: progressAnimations.verificationRate,
+							},
+							{
+								icon: Users,
+								label: "Global Reach",
+								value: "45+",
+								description: "Countries supported",
+								color: "cyan",
+								progress: progressAnimations.globalReach,
+							},
+							{
+								icon: Lock,
+								label: "Security Uptime",
+								value: "99.99%",
+								description: "System reliability",
+								color: "violet",
+								progress: progressAnimations.securityUptime,
+							},
+						].map((metric, index) => {
 							const Icon = metric.icon;
 							return (
 								<div
 									key={metric.label}
-									className="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
-									<Icon className="w-8 h-8 text-blue-500 dark:text-blue-400 mx-auto mb-3" />
-									<div className="space-y-1">
-										<div className="text-2xl font-bold text-gray-900 dark:text-white">
-											{metric.value}
-										</div>
-										<div className="text-sm text-gray-600 dark:text-gray-400">
-											{metric.label}
-										</div>
+									className="group relative p-6 rounded-2xl bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-500 transition-all duration-300 hover:shadow-xl">
+									{/* Icon */}
+									<div
+										className={`inline-flex p-3 rounded-xl bg-${metric.color}-100 dark:bg-${metric.color}-900/30 mb-4`}>
+										<Icon
+											className={`w-6 h-6 text-${metric.color}-600 dark:text-${metric.color}-400`}
+										/>
 									</div>
+
+									{/* Value */}
+									<div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+										{metric.value}
+									</div>
+
+									{/* Label */}
+									<div className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
+										{metric.label}
+									</div>
+
+									{/* Description */}
+									<div className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+										{metric.description}
+									</div>
+
+									{/* Progress Bar */}
+									<div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+										<div
+											className={`h-full bg-gradient-to-r from-${metric.color}-500 to-${metric.color}-400 rounded-full transition-all duration-1000`}
+											style={{ width: `${metric.progress}%` }}
+										/>
+									</div>
+
+									{/* Hover Effect */}
+									<div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
 								</div>
 							);
 						})}
@@ -277,13 +349,13 @@ export default function ComplianceSection() {
 					</div>
 
 					<div className="flex flex-col sm:flex-row gap-4 justify-center">
-						<button className="inline-flex items-center gap-3 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors">
-							<span>Explore Compliance</span>
-							<ArrowRight className="w-5 h-5" />
+						<button className="inline-flex items-center gap-3 px-8 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-lg group">
+							<span>Explore Compliance Framework</span>
+							<ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
 						</button>
 
-						<button className="px-8 py-3 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-semibold rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-							Schedule Review
+						<button className="px-8 py-3 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-semibold rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 hover:shadow-md">
+							Schedule Compliance Review
 						</button>
 					</div>
 				</div>
