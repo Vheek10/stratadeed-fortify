@@ -5,12 +5,13 @@
 
 const nextConfig = {
 	reactStrictMode: true,
-
-	// Disable Turbopack entirely - this is the most reliable fix
-	// Turbopack has issues with certain Node.js modules
+	// Explicitly disable Turbopack to use webpack
 	experimental: {
-		turbo: false,
+		// Remove or set to false to disable Turbopack
+		turbo: undefined, // or remove this line entirely
 	},
+
+	swcMinify: true, // Keep SWC minification
 
 	webpack: (config, { isServer, dev }) => {
 		// Client-specific configurations
@@ -19,8 +20,8 @@ const nextConfig = {
 				fs: false,
 				path: false,
 				os: false,
-				crypto: require.resolve("crypto-browserify"),
-				stream: require.resolve("stream-browserify"),
+				crypto: false,
+				stream: false,
 				http: false,
 				https: false,
 				zlib: false,
@@ -29,11 +30,38 @@ const nextConfig = {
 				child_process: false,
 				worker_threads: false,
 			};
+
+			// Use IgnorePlugin to completely ignore problematic packages
+			const webpack = require("webpack");
+			config.plugins.push(
+				new webpack.IgnorePlugin({
+					resourceRegExp: /^thread-stream$/,
+					contextRegExp: /node_modules/,
+				}),
+			);
 		}
 
-		// Ignore problematic modules and test files
+		// Exclude test files from all packages
 		config.module.rules.push({
-			test: /[\\/]node_modules[\\/](thread-stream|pino)[\\/].*\.(js|ts|mjs)$/,
+			test: /\.(test|spec)\.(js|ts|mjs)$/,
+			use: "ignore-loader",
+		});
+
+		// Exclude specific problematic directories
+		config.module.rules.push({
+			test: /[\\/](test|__tests__|tests|bench|benchmark)[\\/]/,
+			use: "ignore-loader",
+		});
+
+		// Specifically ignore thread-stream test files
+		config.module.rules.push({
+			test: /[\\/]thread-stream[\\/].*[\\/]test[\\/]/,
+			use: "ignore-loader",
+		});
+
+		// Also ignore markdown, license, and other non-js files
+		config.module.rules.push({
+			test: /\.(md|yml|sh|zip)$/,
 			use: "ignore-loader",
 		});
 
