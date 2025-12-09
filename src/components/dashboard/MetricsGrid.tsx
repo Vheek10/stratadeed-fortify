@@ -1,37 +1,40 @@
 /** @format */
 
 import { MoreVertical, ArrowUpRight } from "lucide-react";
-
-interface DashboardMetric {
-	id: string;
-	title: string;
-	value: string | number;
-	change: number;
-	icon: React.ComponentType<{ className?: string }>;
-	gradientFrom: string;
-	borderColor: string;
-	iconColor: string;
-}
+import { DashboardMetric } from "./data/dashboard-data";
 
 interface MetricsGridProps {
 	metrics: DashboardMetric[];
 }
 
 export default function MetricsGrid({ metrics }: MetricsGridProps) {
+	const getIconBgColor = (color: string) => {
+		switch (color) {
+			case "blue":
+				return "bg-blue-500/10";
+			case "emerald":
+				return "bg-emerald-500/10";
+			case "purple":
+				return "bg-purple-500/10";
+			case "amber":
+				return "bg-amber-500/10";
+			default:
+				return "bg-gray-500/10";
+		}
+	};
+
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
 			{metrics.map((metric) => {
 				const Icon = metric.icon;
+				const iconBgClass = getIconBgColor(metric.color);
+
 				return (
 					<div
 						key={metric.id}
 						className={`bg-gradient-to-br ${metric.gradientFrom} rounded-xl p-5 border ${metric.borderColor}`}>
 						<div className="flex items-center justify-between mb-4">
-							<div
-								className="p-2 rounded-lg bg-opacity-10"
-								style={{
-									backgroundColor: `${metric.iconColor.replace("text-", "")}20`,
-								}}>
+							<div className={`p-2 rounded-lg ${iconBgClass}`}>
 								<Icon className={`w-5 h-5 ${metric.iconColor}`} />
 							</div>
 							<div className="flex items-center gap-2">
