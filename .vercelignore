@@ -1,0 +1,24 @@
+<!-- @format -->
+
+# Ignore test files
+
+**/\*.test.js
+**/_.test.ts
+\*\*/_.test.mjs \*_/_.spec.js
+
+# Ignore problematic package directories
+
+node_modules/thread-stream/test/
+node_modules/pino/test/
+node_modules/@walletconnect/\*\*/test/
+
+# Ignore docs
+
+**/README.md
+**/CHANGELOG.md
+\*\*/LICENSE
+
+# Build caches
+
+.next/cache/
+node_modules/.cache/

@@ -49,37 +49,37 @@ export default function HeroSection() {
 				<div className="w-full px-4 sm:px-6 lg:px-8">
 					<div className="max-w-6xl mx-auto">
 						<div className="text-center">
-							{/* Semi-transparent badge for better image visibility */}
-							<div className="inline-flex items-center gap-3 px-5 py-2.5 bg-gray-800/40 backdrop-blur-md rounded-full mb-10 border border-gray-700/30">
-								<Sparkles className="w-4 h-4 text-blue-400 animate-pulse" />
-								<span className="text-sm font-semibold text-gray-200 tracking-wide">
-									INNOVATING REAL ESTATE GLOBALLY
+							{/* Semi-transparent badge - Mobile responsive */}
+							<div className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-gray-800/40 backdrop-blur-md rounded-full mb-6 sm:mb-8 lg:mb-10 border border-gray-700/30">
+								<Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-blue-400 animate-pulse" />
+								<span className="text-xs sm:text-sm font-semibold text-gray-200 tracking-wide whitespace-nowrap">
+									INNOVATING REAL ESTATE
 								</span>
-								<Shield className="w-4 h-4 text-cyan-400" />
+								<Shield className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-400" />
 							</div>
 
-							{/* Main Heading with transparent background */}
-							<div className="relative mb-10">
+							{/* Main Heading with responsive text sizes */}
+							<div className="relative mb-6 sm:mb-8 lg:mb-10">
 								<div className="relative inline-block">
-									<h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] mb-6">
+									<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] mb-4 sm:mb-6">
 										<span className="block">Tokenizing Global</span>
-										<span className="block bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-300 bg-clip-text text-transparent">
+										<span className="block bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-300 bg-clip-text text-transparent mt-1 sm:mt-2">
 											Real Estate Assets
 										</span>
 									</h1>
 									{/* Subtle text shadow for better readability */}
 									<div className="absolute inset-0 -z-10 blur-sm opacity-30">
-										<h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-black leading-[1.1] mb-6">
+										<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black leading-[1.1] mb-4 sm:mb-6">
 											<span className="block">Tokenizing Global</span>
 											<span className="block">Real Estate Assets</span>
 										</h1>
 									</div>
 								</div>
 
-								{/* Subtitle with slight background for readability */}
-								<div className="mt-8 max-w-3xl mx-auto">
+								{/* Subtitle with responsive text */}
+								<div className="mt-6 sm:mt-8 max-w-3xl mx-auto px-2">
 									<div className="relative">
-										<p className="text-lg sm:text-xl lg:text-2xl text-gray-200 leading-relaxed relative z-10">
+										<p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 leading-relaxed relative z-10">
 											Verified digital deeds. Borderless ownership.{" "}
 											<span className="font-semibold text-white">
 												Unprecedented liquidity.
@@ -91,12 +91,12 @@ export default function HeroSection() {
 								</div>
 
 								{/* Decorative line */}
-								<div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-32 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+								<div className="absolute -bottom-2 sm:-bottom-3 lg:-bottom-4 left-1/2 transform -translate-x-1/2 w-24 sm:w-28 lg:w-32 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
 							</div>
 
-							{/* Value Proposition - More transparent */}
-							<div className="max-w-3xl mx-auto mb-12">
-								<div className="flex flex-wrap justify-center gap-6">
+							{/* Value Proposition - Stack on mobile */}
+							<div className="max-w-3xl mx-auto mb-8 sm:mb-10 lg:mb-12 px-2">
+								<div className="flex flex-col sm:flex-row justify-center items-center sm:items-start gap-4 sm:gap-6">
 									{[
 										{
 											icon: Shield,
@@ -116,14 +116,14 @@ export default function HeroSection() {
 									].map((item, index) => (
 										<div
 											key={index}
-											className="flex items-center gap-3 group">
+											className="flex items-center gap-3 group w-full sm:w-auto justify-center sm:justify-start">
 											<div
-												className={`w-10 h-10 rounded-full bg-${item.color}-900/30 flex items-center justify-center border border-${item.color}-800/20 group-hover:border-${item.color}-700/40 transition-all duration-300 backdrop-blur-sm`}>
+												className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-${item.color}-900/30 flex items-center justify-center border border-${item.color}-800/20 group-hover:border-${item.color}-700/40 transition-all duration-300 backdrop-blur-sm`}>
 												<item.icon
-													className={`w-5 h-5 text-${item.color}-400 group-hover:scale-110 transition-transform`}
+													className={`w-4 h-4 sm:w-5 sm:h-5 text-${item.color}-400 group-hover:scale-110 transition-transform`}
 												/>
 											</div>
-											<span className="text-gray-200 text-sm font-medium group-hover:text-white transition-colors">
+											<span className="text-gray-200 text-sm sm:text-base font-medium group-hover:text-white transition-colors whitespace-nowrap">
 												{item.label}
 											</span>
 										</div>
@@ -131,18 +131,20 @@ export default function HeroSection() {
 								</div>
 							</div>
 
-							{/* CTA Buttons - Enhanced visibility */}
-							<div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+							{/* CTA Buttons - Stack on mobile */}
+							<div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-12 sm:mb-14 lg:mb-16 px-4">
 								{/* Primary Button */}
 								<Link
 									href="/signup"
-									className="group relative px-8 py-3.5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:shadow-blue-500/40 min-w-[180px] text-center shadow-lg">
+									className="group relative px-6 sm:px-8 py-3 sm:py-3.5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:shadow-blue-500/40 w-full sm:w-auto text-center shadow-lg">
 									{/* Shine effect */}
 									<div className="absolute inset-0 translate-x-[-100%] skew-x-[-45deg] group-hover:translate-x-[100%] group-hover:skew-x-[-45deg] transition-all duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
 
 									{/* Content */}
 									<div className="relative flex items-center justify-center gap-2">
-										<span className="text-sm font-medium">Start Investing</span>
+										<span className="text-sm sm:text-base font-medium">
+											Start Investing
+										</span>
 										<ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
 									</div>
 
@@ -150,17 +152,19 @@ export default function HeroSection() {
 									<div className="absolute inset-0 rounded-xl p-[1px] bg-gradient-to-r from-blue-500 to-cyan-400 -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 								</Link>
 
-								{/* Secondary Button - More transparent */}
+								{/* Secondary Button */}
 								<Link
 									href="/list-property"
-									className="group relative px-8 py-3.5 bg-gray-800/40 backdrop-blur-sm border border-gray-700/30 text-gray-200 font-semibold rounded-xl overflow-hidden transition-all duration-500 hover:bg-gray-800/60 hover:border-gray-600/50 hover:text-white min-w-[180px] text-center shadow-md">
+									className="group relative px-6 sm:px-8 py-3 sm:py-3.5 bg-gray-800/40 backdrop-blur-sm border border-gray-700/30 text-gray-200 font-semibold rounded-xl overflow-hidden transition-all duration-500 hover:bg-gray-800/60 hover:border-gray-600/50 hover:text-white w-full sm:w-auto text-center shadow-md">
 									{/* Background glow on hover */}
 									<div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 to-cyan-500/0 group-hover:from-blue-600/15 group-hover:to-cyan-600/15 transition-all duration-500" />
 
 									{/* Content */}
 									<div className="relative flex items-center justify-center gap-2">
 										<Building className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
-										<span className="text-sm font-medium">List Property</span>
+										<span className="text-sm sm:text-base font-medium">
+											List Property
+										</span>
 									</div>
 
 									{/* Border animation */}
@@ -168,9 +172,9 @@ export default function HeroSection() {
 								</Link>
 							</div>
 
-							{/* Trust indicators - Better contrast */}
-							<div className="max-w-2xl mx-auto">
-								<div className="grid grid-cols-3 gap-6">
+							{/* Trust indicators - Responsive grid */}
+							<div className="max-w-2xl mx-auto px-4">
+								<div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-6">
 									{[
 										{ value: "100%", label: "Compliance" },
 										{ value: "24/7", label: "Trading" },
@@ -180,18 +184,18 @@ export default function HeroSection() {
 											key={index}
 											className="text-center group">
 											<div className="relative inline-block">
-												<div className="text-3xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300 relative z-10">
+												<div className="text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300 relative z-10">
 													{item.value}
 												</div>
 												{/* Text shadow for better visibility */}
-												<div className="absolute inset-0 text-3xl font-bold text-black/30 mb-2 group-hover:scale-110 transition-transform duration-300 -z-10 blur-[2px]">
+												<div className="absolute inset-0 text-2xl sm:text-3xl font-bold text-black/30 mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300 -z-10 blur-[2px]">
 													{item.value}
 												</div>
 											</div>
-											<div className="text-xs text-gray-300 uppercase tracking-wider font-medium">
+											<div className="text-xs sm:text-sm text-gray-300 uppercase tracking-wider font-medium">
 												{item.label}
 											</div>
-											<div className="h-1 w-6 mx-auto mt-2 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full group-hover:w-10 transition-all duration-300" />
+											<div className="h-1 w-6 mx-auto mt-1 sm:mt-2 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full group-hover:w-8 sm:group-hover:w-10 transition-all duration-300" />
 										</div>
 									))}
 								</div>
@@ -201,27 +205,27 @@ export default function HeroSection() {
 				</div>
 			</div>
 
-			{/* Scroll indicator - More visible */}
-			<div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+			{/* Scroll indicator */}
+			<div className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-20">
 				<div className="flex flex-col items-center">
 					<div className="animate-bounce">
-						<div className="w-7 h-12 border border-gray-600/50 rounded-full flex justify-center backdrop-blur-sm bg-gray-900/40 shadow-lg">
-							<div className="w-1.5 h-4 bg-gradient-to-b from-blue-400 to-cyan-300 rounded-full mt-4 animate-pulse" />
+						<div className="w-6 h-10 sm:w-7 sm:h-12 border border-gray-600/50 rounded-full flex justify-center backdrop-blur-sm bg-gray-900/40 shadow-lg">
+							<div className="w-1.5 h-3 sm:h-4 bg-gradient-to-b from-blue-400 to-cyan-300 rounded-full mt-3 sm:mt-4 animate-pulse" />
 						</div>
 					</div>
-					<span className="text-xs text-gray-400 mt-3 tracking-wider font-medium">
+					<span className="text-xs text-gray-400 mt-2 sm:mt-3 tracking-wider font-medium">
 						EXPLORE
 					</span>
 				</div>
 			</div>
 
-			{/* Subtle decorative elements - More visible */}
-			<div className="absolute top-1/4 left-8 w-0.5 h-40 bg-gradient-to-b from-blue-500/20 via-cyan-400/10 to-transparent hidden lg:block" />
-			<div className="absolute bottom-1/3 right-8 w-0.5 h-32 bg-gradient-to-b from-blue-500/20 via-cyan-400/10 to-transparent hidden lg:block" />
+			{/* Subtle decorative elements - Hide on mobile */}
+			<div className="absolute top-1/4 left-4 sm:left-8 w-0.5 h-20 sm:h-32 lg:h-40 bg-gradient-to-b from-blue-500/20 via-cyan-400/10 to-transparent hidden md:block" />
+			<div className="absolute bottom-1/3 right-4 sm:right-8 w-0.5 h-16 sm:h-24 lg:h-32 bg-gradient-to-b from-blue-500/20 via-cyan-400/10 to-transparent hidden md:block" />
 
-			{/* Corner accents for depth */}
-			<div className="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-blue-500/5 to-transparent hidden lg:block" />
-			<div className="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-cyan-500/5 to-transparent hidden lg:block" />
+			{/* Corner accents for depth - Hide on mobile */}
+			<div className="absolute top-0 left-0 w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-blue-500/5 to-transparent hidden lg:block" />
+			<div className="absolute bottom-0 right-0 w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-tl from-cyan-500/5 to-transparent hidden lg:block" />
 		</section>
 	);
 }
