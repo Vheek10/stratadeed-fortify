@@ -5,14 +5,9 @@
 import {
 	LayoutDashboard,
 	Home,
-	BarChart3,
 	CreditCard,
 	FileText,
-	Settings,
-	TrendingUp,
 	Briefcase,
-	DollarSign,
-	Shield,
 } from "lucide-react";
 
 interface DashboardTabsProps {
@@ -38,40 +33,16 @@ export default function DashboardTabs({
 			color: "text-emerald-600 dark:text-emerald-400",
 		},
 		{
-			id: "analytics",
-			label: "Analytics",
-			icon: BarChart3,
-			color: "text-purple-600 dark:text-purple-400",
-		},
-		{
 			id: "transactions",
 			label: "Transactions",
 			icon: CreditCard,
 			color: "text-amber-600 dark:text-amber-400",
 		},
 		{
-			id: "investments",
-			label: "Investments",
-			icon: TrendingUp,
-			color: "text-cyan-600 dark:text-cyan-400",
-		},
-		{
 			id: "documents",
 			label: "Documents",
 			icon: FileText,
 			color: "text-violet-600 dark:text-violet-400",
-		},
-		{
-			id: "security",
-			label: "Security",
-			icon: Shield,
-			color: "text-red-600 dark:text-red-400",
-		},
-		{
-			id: "settings",
-			label: "Settings",
-			icon: Settings,
-			color: "text-gray-600 dark:text-gray-400",
 		},
 	];
 

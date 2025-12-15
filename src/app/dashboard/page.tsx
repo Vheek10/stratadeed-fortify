@@ -10,12 +10,9 @@ import {
 	PropertiesList,
 	PortfolioDistribution,
 	RecentActivities,
-	QuickActions,
-	MarketInsights,
 	metrics,
 	recentActivities,
 	portfolioDistribution,
-	quickActions,
 } from "../../components/dashboard";
 import { sampleProperties } from "../../lib/dummy-data";
 
@@ -31,7 +28,7 @@ export default function Dashboard() {
 
 	return (
 		<div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 				<DashboardHeader
 					title="Investment Dashboard"
 					subtitle="Monitor your real estate portfolio and market performance"
@@ -60,13 +57,7 @@ export default function Dashboard() {
 						<PortfolioDistribution data={portfolioDistribution} />
 
 						<RecentActivities activities={recentActivities} />
-
-						<QuickActions actions={quickActions} />
 					</div>
-				</div>
-
-				<div className="mt-8">
-					<MarketInsights />
 				</div>
 			</div>
 		</div>

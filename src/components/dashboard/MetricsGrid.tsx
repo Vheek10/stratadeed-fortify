@@ -1,6 +1,6 @@
 /** @format */
 
-import { MoreVertical, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { DashboardMetric } from "./data/dashboard-data";
 
 interface MetricsGridProps {
@@ -32,30 +32,31 @@ export default function MetricsGrid({ metrics }: MetricsGridProps) {
 				return (
 					<div
 						key={metric.id}
-						className={`bg-gradient-to-br ${metric.gradientFrom} rounded-xl p-5 border ${metric.borderColor}`}>
-						<div className="flex items-center justify-between mb-4">
-							<div className={`p-2 rounded-lg ${iconBgClass}`}>
-								<Icon className={`w-5 h-5 ${metric.iconColor}`} />
-							</div>
-							<div className="flex items-center gap-2">
-								<div className="flex items-center gap-1 px-2 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-full text-xs">
+						className={`relative overflow-hidden bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all duration-300 group`}>
+						<div
+							className={`absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity`}>
+							<Icon className={`w-24 h-24 ${metric.color === 'blue' ? 'text-blue-500' : metric.color === 'emerald' ? 'text-emerald-500' : metric.color === 'purple' ? 'text-purple-500' : 'text-amber-500'}`} />
+						</div>
+
+						<div className="relative z-10">
+							<div className="flex items-center justify-between mb-4">
+								<div className={`p-3 rounded-xl ${iconBgClass}`}>
+									<Icon className={`w-6 h-6 ${metric.iconColor}`} />
+								</div>
+								<div className="flex items-center gap-1 px-2.5 py-1 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 rounded-lg text-xs font-semibold">
 									<ArrowUpRight className="w-3 h-3" />
 									{metric.change}%
 								</div>
-								<MoreVertical className="w-4 h-4 text-gray-400 cursor-pointer" />
 							</div>
-						</div>
-						<div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
-							{metric.value}
-						</div>
-						<div className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-							{metric.title}
-						</div>
-						<div className="text-xs text-gray-500">
-							<span className="text-emerald-600 dark:text-emerald-400">
-								{metric.change}%
-							</span>{" "}
-							this month
+							
+							<div>
+								<div className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
+									{metric.title}
+								</div>
+								<div className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">
+									{metric.value}
+								</div>
+							</div>
 						</div>
 					</div>
 				);
