@@ -50,9 +50,9 @@ export default function HeroSection() {
 					<div className="max-w-6xl mx-auto">
 						<div className="text-center">
 							{/* Semi-transparent badge - Mobile responsive */}
-							<div className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-gray-800/40 backdrop-blur-md rounded-full mb-6 sm:mb-8 lg:mb-10 border border-gray-700/30">
+							<div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 lg:px-5 lg:py-2.5 bg-gray-800/40 backdrop-blur-md rounded-full mb-6 sm:mb-8 lg:mb-10 border border-gray-700/30">
 								<Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-blue-400 animate-pulse" />
-								<span className="text-xs sm:text-sm font-semibold text-gray-200 tracking-wide whitespace-nowrap">
+								<span className="text-[10px] xs:text-xs sm:text-sm font-semibold text-gray-200 tracking-wide whitespace-nowrap">
 									INNOVATING REAL ESTATE
 								</span>
 								<Shield className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-400" />
@@ -61,7 +61,7 @@ export default function HeroSection() {
 							{/* Main Heading with responsive text sizes */}
 							<div className="relative mb-6 sm:mb-8 lg:mb-10">
 								<div className="relative inline-block">
-									<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] mb-4 sm:mb-6">
+										<h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] mb-4 sm:mb-6">
 										<span className="block">Tokenizing Global</span>
 										<span className="block bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-300 bg-clip-text text-transparent mt-1 sm:mt-2">
 											Real Estate Assets
@@ -79,7 +79,7 @@ export default function HeroSection() {
 								{/* Subtitle with responsive text */}
 								<div className="mt-6 sm:mt-8 max-w-3xl mx-auto px-2">
 									<div className="relative">
-										<p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 leading-relaxed relative z-10">
+										<p className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 leading-relaxed relative z-10">
 											Verified digital deeds. Borderless ownership.{" "}
 											<span className="font-semibold text-white">
 												Unprecedented liquidity.
@@ -131,12 +131,13 @@ export default function HeroSection() {
 								</div>
 							</div>
 
+	
 							{/* CTA Buttons - Stack on mobile */}
-							<div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-12 sm:mb-14 lg:mb-16 px-4">
+							<div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center mb-12 sm:mb-14 lg:mb-16 px-4 w-full max-w-md sm:max-w-none mx-auto">
 								{/* Primary Button */}
 								<Link
 									href="/signup"
-									className="group relative px-6 sm:px-8 py-3 sm:py-3.5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:shadow-blue-500/40 w-full sm:w-auto text-center shadow-lg">
+									className="group relative px-6 sm:px-8 py-3.5 sm:py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:shadow-blue-500/40 w-full sm:w-auto text-center shadow-lg min-h-[48px]">
 									{/* Shine effect */}
 									<div className="absolute inset-0 translate-x-[-100%] skew-x-[-45deg] group-hover:translate-x-[100%] group-hover:skew-x-[-45deg] transition-all duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
 
@@ -155,7 +156,7 @@ export default function HeroSection() {
 								{/* Secondary Button */}
 								<Link
 									href="/list-property"
-									className="group relative px-6 sm:px-8 py-3 sm:py-3.5 bg-gray-800/40 backdrop-blur-sm border border-gray-700/30 text-gray-200 font-semibold rounded-xl overflow-hidden transition-all duration-500 hover:bg-gray-800/60 hover:border-gray-600/50 hover:text-white w-full sm:w-auto text-center shadow-md">
+									className="group relative px-6 sm:px-8 py-3.5 sm:py-4 bg-gray-800/40 backdrop-blur-sm border border-gray-700/30 text-gray-200 font-semibold rounded-xl overflow-hidden transition-all duration-500 hover:bg-gray-800/60 hover:border-gray-600/50 hover:text-white w-full sm:w-auto text-center shadow-md min-h-[48px]">
 									{/* Background glow on hover */}
 									<div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 to-cyan-500/0 group-hover:from-blue-600/15 group-hover:to-cyan-600/15 transition-all duration-500" />
 
@@ -174,11 +175,11 @@ export default function HeroSection() {
 
 							{/* Trust indicators - Responsive grid */}
 							<div className="max-w-2xl mx-auto px-4">
-								<div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+								<div className="grid grid-cols-3 gap-2 xs:gap-3 sm:gap-4 md:gap-6">
 									{[
 										{ value: "100%", label: "Compliance" },
 										{ value: "24/7", label: "Trading" },
-										{ value: "✓", label: "Verified" },
+										{ value: "YES", label: "Verified" },
 									].map((item, index) => (
 										<div
 											key={index}

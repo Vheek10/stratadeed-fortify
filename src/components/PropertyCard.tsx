@@ -89,7 +89,7 @@ export default function PropertyCard({
 			onMouseLeave={() => setIsHovered(false)}>
 			<div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-2xl hover:scale-[1.02] transition-all duration-500 h-full flex flex-col">
 				{/* Image Container */}
-				<div className="relative h-48 overflow-hidden">
+				<div className="relative h-44 sm:h-48 md:h-52 overflow-hidden">
 					{/* Main Image */}
 					<img
 						src={imageUrl}
@@ -111,7 +111,7 @@ export default function PropertyCard({
 						{property.investmentReturn && (
 							<div className="px-3 py-1.5 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm text-gray-900 dark:text-white text-xs font-semibold rounded-full shadow-lg">
 								<span className={getReturnColor(property.investmentReturn)}>
-									↑ {property.investmentReturn}% ROI
+									{property.investmentReturn}% ROI
 								</span>
 							</div>
 						)}
@@ -204,34 +204,34 @@ export default function PropertyCard({
 					</div>
 
 					{/* Property Features */}
-					<div className="grid grid-cols-4 gap-3 mb-6">
-						<div className="text-center p-2 bg-gray-50 dark:bg-gray-900/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-							<Bed className="w-5 h-5 text-blue-500 mx-auto mb-1.5" />
-							<div className="text-base font-bold text-gray-900 dark:text-white">
+					<div className="grid grid-cols-2 xs:grid-cols-4 gap-2 sm:gap-3 mb-6">
+						<div className="text-center p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-900/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+							<Bed className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mx-auto mb-1 sm:mb-1.5" />
+							<div className="text-sm sm:text-base font-bold text-gray-900 dark:text-white">
 								{property.bedrooms}
 							</div>
-							<div className="text-xs text-gray-500 font-medium">Beds</div>
+							<div className="text-[10px] xs:text-xs text-gray-500 font-medium">Beds</div>
 						</div>
-						<div className="text-center p-2 bg-gray-50 dark:bg-gray-900/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-							<Bath className="w-5 h-5 text-cyan-500 mx-auto mb-1.5" />
-							<div className="text-base font-bold text-gray-900 dark:text-white">
+						<div className="text-center p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-900/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+							<Bath className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-500 mx-auto mb-1 sm:mb-1.5" />
+							<div className="text-sm sm:text-base font-bold text-gray-900 dark:text-white">
 								{property.bathrooms}
 							</div>
-							<div className="text-xs text-gray-500 font-medium">Baths</div>
+							<div className="text-[10px] xs:text-xs text-gray-500 font-medium">Baths</div>
 						</div>
-						<div className="text-center p-2 bg-gray-50 dark:bg-gray-900/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-							<Square className="w-5 h-5 text-emerald-500 mx-auto mb-1.5" />
-							<div className="text-base font-bold text-gray-900 dark:text-white">
+						<div className="text-center p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-900/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+							<Square className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500 mx-auto mb-1 sm:mb-1.5" />
+							<div className="text-sm sm:text-base font-bold text-gray-900 dark:text-white">
 								{property.squareFeet.toLocaleString()}
 							</div>
-							<div className="text-xs text-gray-500 font-medium">Sqft</div>
+							<div className="text-[10px] xs:text-xs text-gray-500 font-medium">Sqft</div>
 						</div>
-						<div className="text-center p-2 bg-gray-50 dark:bg-gray-900/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-							<Users className="w-5 h-5 text-purple-500 mx-auto mb-1.5" />
-							<div className="text-base font-bold text-gray-900 dark:text-white">
+						<div className="text-center p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-900/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+							<Users className="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mx-auto mb-1 sm:mb-1.5" />
+							<div className="text-sm sm:text-base font-bold text-gray-900 dark:text-white">
 								{property.capacity}
 							</div>
-							<div className="text-xs text-gray-500 font-medium">Capacity</div>
+							<div className="text-[10px] xs:text-xs text-gray-500 font-medium">Capacity</div>
 						</div>
 					</div>
 
@@ -271,23 +271,23 @@ export default function PropertyCard({
 						</div>
 
 						{/* Action Buttons */}
-						<div className="flex gap-2">
+						<div className="flex flex-col xs:flex-row gap-2">
 							{isInCart ? (
 								<button
 									onClick={() => onRemoveFromCart(property.id)}
-									className="flex-1 px-4 py-3 bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 text-red-600 dark:text-red-400 font-semibold rounded-xl hover:shadow-lg hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2">
+									className="flex-1 px-4 py-3 bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 text-red-600 dark:text-red-400 font-semibold rounded-xl hover:shadow-lg hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2 min-h-[48px]">
 									<X className="w-4 h-4" />
 									Remove from Cart
 								</button>
 							) : (
 								<button
 									onClick={() => onAddToCart(property)}
-									className="flex-1 px-4 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-xl hover:shadow-xl hover:scale-[1.02] hover:from-blue-700 hover:to-cyan-600 transition-all duration-300 flex items-center justify-center gap-2 group">
+									className="flex-1 px-4 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-xl hover:shadow-xl hover:scale-[1.02] hover:from-blue-700 hover:to-cyan-600 transition-all duration-300 flex items-center justify-center gap-2 group min-h-[48px]">
 									<ShoppingCart className="w-4 h-4 group-hover:scale-110 transition-transform" />
 									Add to Portfolio
 								</button>
 							)}
-							<button className="px-4 py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:border-blue-500 dark:hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2">
+							<button className="px-4 py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:border-blue-500 dark:hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 min-h-[48px] xs:flex-none xs:w-auto w-full">
 								<Info className="w-4 h-4" />
 								Details
 							</button>

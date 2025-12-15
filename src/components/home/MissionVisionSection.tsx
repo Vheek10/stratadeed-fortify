@@ -67,7 +67,7 @@ export default function MissionVisionSection() {
 							<div className="flex items-center gap-3 text-blue-300">
 								<Home className="w-4 h-4" />
 								<span className="text-sm font-medium">
-									Trust • Security • Innovation
+									Trust | Security | Innovation
 								</span>
 							</div>
 						</div>
@@ -109,7 +109,7 @@ export default function MissionVisionSection() {
 							<div className="flex items-center gap-3 text-cyan-300">
 								<Globe className="w-4 h-4" />
 								<span className="text-sm font-medium">
-									Accessibility • Transparency • Global
+									Accessibility | Transparency | Global
 								</span>
 							</div>
 						</div>

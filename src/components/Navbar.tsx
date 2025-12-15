@@ -25,6 +25,7 @@ import { cn } from "@/lib/utils";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount, useDisconnect } from "wagmi";
 
+
 // Icon mapping for navigation items
 const navIcons = {
 	home: Home,
@@ -155,16 +156,16 @@ export default function Navbar() {
 												className={cn(
 													"flex items-center gap-2 text-sm font-medium transition-all duration-300 relative group/nav",
 													active
-														? "text-blue-400"
-														: "text-gray-300 hover:text-blue-400",
+														? "text-blue-600 dark:text-blue-400"
+														: "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400",
 												)}
 												aria-current={active ? "page" : undefined}>
 												<Icon
 													className={cn(
 														"w-4 h-4 transition-all duration-300",
 														active
-															? "text-blue-400"
-															: "text-gray-400 group-hover/nav:text-blue-400",
+															? "text-blue-600 dark:text-blue-400"
+															: "text-gray-500 dark:text-gray-400 group-hover/nav:text-blue-600 dark:group-hover/nav:text-blue-400",
 													)}
 												/>
 												<span className="relative">
@@ -192,6 +193,7 @@ export default function Navbar() {
 								<div className="flex items-center gap-3">
 									{/* Desktop: Full wallet info */}
 									<div className="hidden lg:flex items-center gap-3">
+
 										<div className="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-emerald-900/30 to-green-900/30 border border-emerald-800/50 rounded-lg backdrop-blur-sm">
 											<CheckCircle className="w-4 h-4 text-emerald-400" />
 											<span className="text-sm font-medium text-emerald-400">
@@ -297,9 +299,10 @@ export default function Navbar() {
 								<>
 									{/* Desktop: Full buttons */}
 									<div className="hidden lg:flex items-center gap-3">
+
 										<Link
 											href="/signin"
-											className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-blue-400 transition-colors">
+											className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
 											Sign In
 										</Link>
 										<Link

@@ -167,17 +167,13 @@ export default function About() {
 									deeds can be tokenized, listed and transacted using blockchain
 									infrastructure.
 								</p>
-								<p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-									This frontend is the light-themed MVP interface for the Mantle
-									Hackathon project, focusing on clean UX, asset upload flows,
-									and a modern marketplace layout.
-								</p>
+
 							</div>
 
 							<div className="mt-8 flex items-center gap-4">
 								<CheckCircle className="w-5 h-5 text-emerald-500" />
 								<span className="font-medium text-gray-900 dark:text-white">
-									Live prototype • Active development • Real-world testing
+									Live prototype | Active development | Real-world testing
 								</span>
 							</div>
 						</div>

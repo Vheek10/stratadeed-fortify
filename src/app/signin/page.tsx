@@ -201,7 +201,7 @@ export default function SignInPage() {
 													<div className="mt-2">
 														<div className="flex items-center justify-between text-xs text-emerald-400/80 mb-1">
 															<span>Redirecting to Dashboard...</span>
-															<span className="animate-pulse">• • •</span>
+															<span className="animate-pulse">...</span>
 														</div>
 														<div className="w-full h-1 bg-emerald-900/50 rounded-full overflow-hidden">
 															<div className="h-full bg-gradient-to-r from-emerald-400 via-green-400 to-emerald-400 animate-[shimmer_1.5s_ease-in-out_infinite]" />
@@ -267,7 +267,7 @@ export default function SignInPage() {
 											type={showPassword ? "text" : "password"}
 											value={formData.password}
 											onChange={(e) => handleChange("password", e.target.value)}
-											placeholder="••••••••"
+											placeholder="********"
 											required
 											className="w-full pl-9 pr-10 py-2.5 text-sm bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
 										/>

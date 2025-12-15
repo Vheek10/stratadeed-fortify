@@ -2,7 +2,6 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import CartSidebar from "../../components/CartSidebar";
 import { sampleProperties } from "../../lib/dummy-data";
 import {
 	Home,
@@ -15,10 +14,6 @@ import {
 	Star,
 	Search,
 	X,
-	Tag,
-	Sparkles,
-	CheckCircle,
-	Eye,
 } from "lucide-react";
 
 // Components
@@ -26,8 +21,6 @@ import MarketplaceHeader from "../../components/marketplace/MarketplaceHeader";
 import FilterSidebar from "../../components/marketplace/FilterSidebar";
 import ControlsBar from "../../components/marketplace/ControlsBar";
 import PropertyGrid from "../../components/marketplace/PropertyGrid";
-import MarketInsights from "../../components/marketplace/MarketInsights";
-import FeaturedShowcase from "../../components/marketplace/FeaturedShowcase";
 import MarketplaceFooter from "../../components/marketplace/MarketplaceFooter";
 
 // Data
@@ -69,11 +62,6 @@ const demoImages = [
 	"https://images.unsplash.com/photo-1613977257592-4871e5fcd7a4?w=800&auto=format&fit=crop",
 ];
 
-interface CartItem {
-	property: (typeof sampleProperties)[0];
-	quantity: number;
-}
-
 export default function MarketplacePage() {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [selectedCity, setSelectedCity] = useState("All Cities");
@@ -81,49 +69,7 @@ export default function MarketplacePage() {
 	const [selectedPrice, setSelectedPrice] = useState("Any Price");
 	const [showFilters, setShowFilters] = useState(false);
 	const [sortBy, setSortBy] = useState("featured");
-	const [cart, setCart] = useState<CartItem[]>([]);
-	const [showCart, setShowCart] = useState(false);
-	const [wishlist, setWishlist] = useState<number[]>([]);
 	const [showSearch, setShowSearch] = useState(false);
-	const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-	// Cart functionality
-	const addToCart = (property: (typeof sampleProperties)[0]) => {
-		setCart((prev) => {
-			const existing = prev.find((item) => item.property.id === property.id);
-			if (existing) {
-				return prev.map((item) =>
-					item.property.id === property.id
-						? { ...item, quantity: item.quantity + 1 }
-						: item,
-				);
-			}
-			return [...prev, { property, quantity: 1 }];
-		});
-	};
-
-	const removeFromCart = (propertyId: number) => {
-		setCart((prev) => prev.filter((item) => item.property.id !== propertyId));
-	};
-
-	const updateQuantity = (propertyId: number, quantity: number) => {
-		if (quantity < 1) {
-			removeFromCart(propertyId);
-			return;
-		}
-		setCart((prev) =>
-			prev.map((item) =>
-				item.property.id === propertyId ? { ...item, quantity } : item,
-			),
-		);
-	};
-
-	const toggleWishlist = (propertyId: number) => {
-		setWishlist((prev) =>
-			prev.includes(propertyId)
-				? prev.filter((id) => id !== propertyId)
-				: [...prev, propertyId],
-		);
-	};
 
 	// Filter properties
 	const filteredProperties = useMemo(() => {
@@ -189,25 +135,6 @@ export default function MarketplacePage() {
 		return filtered;
 	}, [searchQuery, selectedCity, selectedType, selectedPrice, sortBy]);
 
-	// Calculations
-	const totalValue = filteredProperties.reduce(
-		(sum, prop) => sum + prop.price,
-		0,
-	);
-	const averagePrice =
-		filteredProperties.length > 0
-			? (totalValue / filteredProperties.length).toLocaleString("en-US", {
-					style: "currency",
-					currency: "USD",
-					maximumFractionDigits: 0,
-			  })
-			: "$0";
-
-	const cartTotal = cart.reduce(
-		(sum, item) => sum + item.property.price * item.quantity,
-		0,
-	);
-
 	const clearFilters = () => {
 		setSearchQuery("");
 		setSelectedCity("All Cities");
@@ -224,9 +151,6 @@ export default function MarketplacePage() {
 					setSearchQuery={setSearchQuery}
 					showSearch={showSearch}
 					setShowSearch={setShowSearch}
-					cart={cart}
-					setShowCart={setShowCart}
-					totalValue={totalValue}
 				/>
 
 				{/* Mobile Search */}
@@ -259,8 +183,6 @@ export default function MarketplacePage() {
 						showFilters={showFilters}
 						setShowFilters={setShowFilters}
 						filteredProperties={filteredProperties}
-						totalValue={totalValue}
-						averagePrice={averagePrice}
 						cities={cities}
 						selectedCity={selectedCity}
 						setSelectedCity={setSelectedCity}
@@ -276,64 +198,25 @@ export default function MarketplacePage() {
 
 					{/* Property Grid */}
 					<div className="lg:w-3/4">
-						{/* Page Header */}
-						<div className="mb-6">
-							<h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-								Premium Properties
-							</h2>
-							<p className="text-gray-600 dark:text-gray-400 mt-1">
-								Discover exclusive real estate investments worldwide
-							</p>
-						</div>
-
 						{/* Controls */}
 						<ControlsBar
 							filteredProperties={filteredProperties}
 							sortBy={sortBy}
 							setSortBy={setSortBy}
-							viewMode={viewMode}
-							setViewMode={setViewMode}
 						/>
 
 						{/* Property Grid */}
 						<PropertyGrid
 							filteredProperties={filteredProperties}
 							demoImages={demoImages}
-							wishlist={wishlist}
-							cart={cart}
-							addToCart={addToCart}
-							removeFromCart={removeFromCart}
-							toggleWishlist={toggleWishlist}
 							clearFilters={clearFilters}
 						/>
-
-						{/* Market Insights */}
-						{filteredProperties.length > 0 && (
-							<MarketInsights
-								filteredProperties={filteredProperties}
-								averagePrice={averagePrice}
-								totalValue={totalValue}
-							/>
-						)}
 					</div>
 				</div>
 			</div>
 
-			{/* Featured Showcase */}
-			<FeaturedShowcase demoImages={demoImages} />
-
 			{/* Footer */}
 			<MarketplaceFooter />
-
-			{/* Cart Sidebar */}
-			<CartSidebar
-				isOpen={showCart}
-				onClose={() => setShowCart(false)}
-				cart={cart}
-				onUpdateQuantity={updateQuantity}
-				onRemoveItem={removeFromCart}
-				cartTotal={cartTotal}
-			/>
 		</div>
 	);
 }

@@ -7,6 +7,9 @@ import {
 	Home,
 	MoreVertical,
 	ChevronRight,
+	Bath,
+	Square,
+	Star,
 } from "lucide-react";
 import { Property } from "../types";
 
@@ -45,7 +48,7 @@ export default function PropertiesList({ properties }: PropertiesListProps) {
 							/>
 							{property.isFeatured && (
 								<div className="absolute top-1 left-1 px-1.5 py-0.5 bg-blue-600 text-white text-xs rounded">
-									★
+									<Star className="w-3 h-3 fill-current" />
 								</div>
 							)}
 						</div>
@@ -80,14 +83,14 @@ export default function PropertiesList({ properties }: PropertiesListProps) {
 									<span className="text-gray-500">beds</span>
 								</div>
 								<div className="flex items-center gap-1 text-sm">
-									<div className="w-3.5 h-3.5 text-gray-400">○</div>
+									<Bath className="w-3.5 h-3.5 text-gray-400" />
 									<span className="font-medium text-gray-900 dark:text-white">
 										{property.bathrooms}
 									</span>
 									<span className="text-gray-500">baths</span>
 								</div>
 								<div className="flex items-center gap-1 text-sm">
-									<div className="w-3.5 h-3.5 text-gray-400">□</div>
+									<Square className="w-3.5 h-3.5 text-gray-400" />
 									<span className="font-medium text-gray-900 dark:text-white">
 										{property.squareFeet.toLocaleString()}
 									</span>

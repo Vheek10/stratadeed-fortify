@@ -53,7 +53,7 @@ export default function MetricsGrid({ metrics }: MetricsGridProps) {
 						</div>
 						<div className="text-xs text-gray-500">
 							<span className="text-emerald-600 dark:text-emerald-400">
-								↑ {metric.change}%
+								{metric.change}%
 							</span>{" "}
 							this month
 						</div>

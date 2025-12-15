@@ -3,15 +3,12 @@
 
 import {
 	MapPin,
-	Heart,
-	Share2,
-	ShoppingCart,
-	X,
 	Eye,
 	Bed,
 	Bath,
 	Square,
 	Users,
+	ArrowRight,
 } from "lucide-react";
 
 interface Property {
@@ -34,21 +31,11 @@ interface Property {
 interface PropertyCardProps {
 	property: Property;
 	imageUrl: string;
-	isInWishlist: boolean;
-	isInCart: boolean;
-	onToggleWishlist: (id: number) => void;
-	onAddToCart: (property: Property) => void;
-	onRemoveFromCart: (id: number) => void;
 }
 
 export default function PropertyCard({
 	property,
 	imageUrl,
-	isInWishlist,
-	isInCart,
-	onToggleWishlist,
-	onAddToCart,
-	onRemoveFromCart,
 }: PropertyCardProps) {
 	return (
 		<div className="group">
@@ -59,22 +46,6 @@ export default function PropertyCard({
 						alt={property.title}
 						className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
 					/>
-					<div className="absolute top-3 right-3 flex gap-1.5">
-						<button
-							onClick={() => onToggleWishlist(property.id)}
-							className="p-1.5 bg-white/90 backdrop-blur-sm rounded-lg hover:bg-white transition-colors">
-							<Heart
-								className={`w-4 h-4 ${
-									isInWishlist
-										? "fill-red-500 text-red-500"
-										: "text-gray-700"
-								}`}
-							/>
-						</button>
-						<button className="p-1.5 bg-white/90 backdrop-blur-sm rounded-lg hover:bg-white transition-colors">
-							<Share2 className="w-4 h-4 text-gray-700" />
-						</button>
-					</div>
 					{property.isFeatured && (
 						<div className="absolute top-3 left-3 px-2 py-1 bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-xs font-semibold rounded">
 							Premium
@@ -145,26 +116,10 @@ export default function PropertyCard({
 							</div>
 						</div>
 
-						<div className="flex gap-2">
-							{isInCart ? (
-								<button
-									onClick={() => onRemoveFromCart(property.id)}
-									className="flex-1 px-3 py-2 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 font-medium rounded-lg hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors flex items-center justify-center gap-1.5 text-sm">
-									<X className="w-3.5 h-3.5" />
-									Remove
-								</button>
-							) : (
-								<button
-									onClick={() => onAddToCart(property)}
-									className="flex-1 px-3 py-2 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-medium rounded-lg hover:from-blue-700 hover:to-cyan-600 transition-all flex items-center justify-center gap-1.5 text-sm">
-									<ShoppingCart className="w-3.5 h-3.5" />
-									Add to Cart
-								</button>
-							)}
-							<button className="px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-sm">
-								Details
-							</button>
-						</div>
+						<button className="w-full px-4 py-2.5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-medium rounded-lg hover:from-blue-700 hover:to-cyan-600 transition-all flex items-center justify-center gap-2 text-sm">
+							View Details
+							<ArrowRight className="w-4 h-4" />
+						</button>
 					</div>
 				</div>
 			</div>

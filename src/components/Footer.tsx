@@ -56,10 +56,10 @@ export default function Footer() {
 		<footer className="mt-20 bg-gray-900 text-gray-300">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				{/* Main Footer Content */}
-				<div className="py-12 lg:py-16">
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
+				<div className="py-8 sm:py-12 lg:py-16">
+					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8 lg:gap-12">
 						{/* Brand Section */}
-						<div className="lg:col-span-2">
+						<div className="sm:col-span-2 lg:col-span-2">
 							<div className="flex items-center gap-3 mb-6">
 								<div className="w-10 h-10 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 flex items-center justify-center">
 									<Building className="w-6 h-6 text-white" />
@@ -151,8 +151,8 @@ export default function Footer() {
 				</div>
 
 				{/* Bottom Bar */}
-				<div className="py-8 border-t border-gray-800">
-					<div className="flex flex-col md:flex-row justify-between items-center gap-4">
+				<div className="py-6 sm:py-8 border-t border-gray-800">
+					<div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
 						{/* Left Side */}
 						<div className="flex flex-col sm:flex-row items-center gap-4">
 							<div className="flex items-center gap-2 text-sm">
@@ -176,12 +176,12 @@ export default function Footer() {
 								© {currentYear} StrataDeed. All rights reserved.
 							</p>
 							<p className="text-xs text-gray-500 mt-1">
-								Built for Mantle Hackathon • MVP Version
+								Built for Mantle Hackathon | MVP Version
 							</p>
 						</div>
 
 						{/* Right Side - Legal Links */}
-						<div className="flex items-center gap-6">
+						<div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-6">
 							{links.legal.map((link) => (
 								<Link
 									key={link.name}
