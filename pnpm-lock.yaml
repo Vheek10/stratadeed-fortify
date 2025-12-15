@@ -20,9 +20,6 @@ importers:
       '@metamask/sdk':
         specifier: ^0.34.0
         version: 0.34.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
-      '@openzeppelin/contracts':
-        specifier: ^5.4.0
-        version: 5.4.0
       '@rainbow-me/rainbowkit':
         specifier: ^2.2.10
         version: 2.2.10(@tanstack/react-query@5.90.12(react@19.2.0))(@types/react@19.2.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.41.2(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76))(wagmi@3.1.0(da2a0f663f05e85053ac0392bae22155))
@@ -72,6 +69,9 @@ importers:
       '@nomicfoundation/hardhat-toolbox':
         specifier: ^5.0.0
         version: 5.0.0(a84c20093ccf909c420ae56102d93f1f)
+      '@openzeppelin/contracts':
+        specifier: ^5.0.2
+        version: 5.4.0
       '@shadcn/ui':
         specifier: ^0.0.4
         version: 0.0.4
