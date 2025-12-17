@@ -6,6 +6,7 @@ import ComparisonSection from "@/components/home/ComparisonSection";
 import ComplianceSection from "@/components/home/ComplianceSection";
 import MissionVisionSection from "@/components/home/MissionVisionSection";
 import FinalCTASection from "@/components/home/FinalCTASection";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
 
 /**
  * Homepage Component.
@@ -31,6 +32,8 @@ export default function Homepage() {
 
 			{/* Call to Action */}
 			<FinalCTASection />
+
+			<ScrollToTopButton />
 		</div>
 	);
 }

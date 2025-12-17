@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
 
 export default function About() {
   const features = [
@@ -110,7 +111,7 @@ export default function About() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950">
+    <div className="min-h-screen bg-linear-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950">
       {/* Hero Section */}
       <section className="relative py-16 sm:py-20 lg:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Background Image */}
@@ -123,7 +124,7 @@ export default function About() {
             priority
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-900/70 to-cyan-900/70" />
+          <div className="absolute inset-0 bg-linear-to-r from-blue-900/80 via-blue-900/70 to-cyan-900/70" />
         </div>
 
         <div className="relative max-w-7xl mx-auto">
@@ -139,7 +140,7 @@ export default function About() {
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight">
                 Redefining{" "}
-                <span className="bg-gradient-to-r from-cyan-300 to-emerald-300 bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-cyan-300 to-emerald-300 bg-clip-text text-transparent">
                   Real Estate
                 </span>
                 <br />
@@ -155,7 +156,7 @@ export default function About() {
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link
                   href="/signup"
-                  className="group inline-flex items-center justify-center gap-3 px-5 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 text-sm sm:text-base"
+                  className="group inline-flex items-center justify-center gap-3 px-5 sm:px-6 py-2.5 sm:py-3 bg-linear-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 text-sm sm:text-base"
                 >
                   <span>Get Started</span>
                   <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
@@ -224,7 +225,7 @@ export default function About() {
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent" />
               <div className="absolute bottom-6 left-6 right-6">
                 <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg p-4 shadow-lg">
                   <p className="text-sm font-medium text-gray-900 dark:text-white">
@@ -256,7 +257,7 @@ export default function About() {
               </div>
 
               <div className="flex items-center gap-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg p-4">
-                <CheckCircle className="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
+                <CheckCircle className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                 <span className="font-medium text-gray-900 dark:text-white text-sm sm:text-base">
                   Live prototype | Active development | Real-world testing
                 </span>
@@ -289,7 +290,7 @@ export default function About() {
                       className="object-cover group-hover:scale-110 transition-transform duration-500"
                       sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
                     
                     {/* Icon Overlay */}
                     <div className={`absolute top-4 left-4 p-2 rounded-lg ${colorClasses[feature.color as keyof typeof colorClasses].split(' ')[0]}`}>
@@ -312,7 +313,7 @@ export default function About() {
           </div>
 
           {/* Vision Section */}
-          <div className="bg-gradient-to-br from-gray-900 to-black dark:from-gray-800 dark:to-gray-900 rounded-xl lg:rounded-2xl p-6 lg:p-12 overflow-hidden">
+          <div className="bg-linear-to-br from-gray-900 to-black dark:from-gray-800 dark:to-gray-900 rounded-xl lg:rounded-2xl p-6 lg:p-12 overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-5">
               <div className="absolute inset-0" style={{
@@ -386,8 +387,8 @@ export default function About() {
 
           {/* CTA Section */}
           <div className="mt-12 lg:mt-20 text-center">
-            <div className="inline-flex items-center gap-3 px-4 sm:px-6 py-3 sm:py-4 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-lg sm:rounded-2xl mb-6 sm:mb-8 max-w-2xl mx-auto">
-              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+            <div className="inline-flex items-center gap-3 px-4 sm:px-6 py-3 sm:py-4 bg-linear-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-lg sm:rounded-2xl mb-6 sm:mb-8 max-w-2xl mx-auto">
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 dark:text-blue-400 shrink-0" />
               <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-900 dark:text-white">
                 Ready to experience the future of real estate?
               </p>
@@ -396,7 +397,7 @@ export default function About() {
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <Link
                 href="/signup"
-                className="inline-flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 text-sm sm:text-base"
+                className="inline-flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-8 py-2.5 sm:py-3 bg-linear-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 text-sm sm:text-base"
               >
                 <span>Start Investing</span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -411,6 +412,7 @@ export default function About() {
           </div>
         </div>
       </section>
+      <ScrollToTopButton />
     </div>
   );
 }

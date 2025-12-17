@@ -10,7 +10,6 @@ import AuthGuard from "@/components/AuthGuard";
 // Components
 import MarketplaceHeader from "../../components/marketplace/MarketplaceHeader";
 import PropertyGrid from "../../components/marketplace/PropertyGrid";
-import MarketplaceFooter from "../../components/marketplace/MarketplaceFooter";
 
 const demoImages = [
 	"https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&auto=format&fit=crop",
@@ -91,9 +90,6 @@ export default function MarketplacePage() {
 						/>
 					</div>
 				</div>
-
-				{/* Footer */}
-				<MarketplaceFooter />
 			</div>
 		</AuthGuard>
 	);
