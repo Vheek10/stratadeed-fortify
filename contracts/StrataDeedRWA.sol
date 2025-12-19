@@ -7,7 +7,7 @@ import "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol";
+
 
 interface IZKVerifier {
     function verifyProof(bytes calldata proof, bytes32[] calldata publicInputs) external view returns (bool);
@@ -25,9 +25,7 @@ contract StrataDeedRWA is
     ReentrancyGuardUpgradeable, 
     UUPSUpgradeable 
 {
-    using SafeERC20Upgradeable for IERC20Upgradeable;
 
-    // =========================================
     // Constants (Storage Slot-Safe)
     // =========================================
 
