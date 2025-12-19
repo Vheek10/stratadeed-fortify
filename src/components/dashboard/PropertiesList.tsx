@@ -10,6 +10,7 @@ import {
 	DollarSign,
 	Clock,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { Property } from "./types"; // We will alias this or assume types are updated separately, or just treat 'Property' as 'Strategy' object structurally for now.
 
 interface PropertiesListProps {
@@ -17,6 +18,8 @@ interface PropertiesListProps {
 }
 
 export default function PropertiesList({ properties }: PropertiesListProps) {
+	const router = useRouter();
+
 	return (
 		<div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5">
 			<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
@@ -29,7 +32,10 @@ export default function PropertiesList({ properties }: PropertiesListProps) {
 						Fractional real estate ownership
 					</p>
 				</div>
-				<button className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors text-sm shadow-lg shadow-emerald-500/20">
+				<button 
+					onClick={() => router.push("/mint")}
+					className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors text-sm shadow-lg shadow-emerald-500/20"
+				>
 					<Plus className="w-4 h-4" />
 					Tokenize Property
 				</button>

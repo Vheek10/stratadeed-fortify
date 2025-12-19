@@ -67,6 +67,7 @@ export default function PropertyCard({
 		}
 		
 		params.set("type", mintType);
+		params.set("image", imageUrl);
 
 		router.push(`/mint?${params.toString()}`);
 	};

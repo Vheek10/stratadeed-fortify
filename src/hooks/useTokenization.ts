@@ -62,7 +62,8 @@ export function useTokenization() {
 		propertyId: string,
 		metadataURI: string,
 		mintFee: string = "0",
-        privateCommitment: `0x${string}` = "0x0000000000000000000000000000000000000000000000000000000000000000"
+        privateCommitment: `0x${string}` = "0x0000000000000000000000000000000000000000000000000000000000000000",
+		toAddress?: `0x${string}`
 	) => {
 		setLoading(true);
 		setError(null);
@@ -72,7 +73,7 @@ export function useTokenization() {
 				address: contractAddress,
 				abi: StrataDeedNFTABI,
 				functionName: "mintPropertyDeed",
-				args: [propertyId, metadataURI, privateCommitment],
+				args: [toAddress || address!, propertyId, metadataURI, privateCommitment],
 				value: parseEther(mintFee),
 			});
 

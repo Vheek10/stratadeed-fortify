@@ -6,3 +6,5 @@ test = "test"
 cache_path = "cache_forge"
 
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config
+[rpc_endpoints]
+mantle_sepolia = "https://rpc.sepolia.mantle.xyz"
