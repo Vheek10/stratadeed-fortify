@@ -35,6 +35,27 @@ contract StrataDeedRWA is
     uint256 public constant EMERGENCY_WINDOW = 90 days;
     uint256 public constant CLAIM_PERIOD = 90 days;
 
+    // Errors
+    error InvalidArgs();
+    error Unauthorized();
+    error QuorumNotMet();
+    error StateLocked();
+    error CapExceeded();
+    error NoDeposit();
+    error RefundFailed();
+    error PayoutFailed();
+    error WindowNotOpen();
+    error Slippage();
+    error SystemPaused();
+    error Replay();
+    error IdentityReuse();
+    error ZKInactive();
+    error ZKFail();
+    error NonCompliant();
+    error NoTokensLeft();
+    error AlreadyAdmin();
+    error MinThreshold();
+
     // =========================================
     // State Variables (DO NOT REORDER)
     // =========================================
@@ -111,23 +132,23 @@ contract StrataDeedRWA is
         address _owner, 
         address[] memory _admins
     ) public initializer {
-        __ERC20_init("StrataDeed RWA Token V10", "SDRWA-V10");
+        __ERC20_init("StrataDeedRWA", "SDRWA");
         __Ownable_init(_owner);
         __Pausable_init();
         __ReentrancyGuard_init();
         __UUPSUpgradeable_init();
 
-        require(_cap > 0 && _admins.length >= MULTISIG_THRESHOLD, "Init: invalid args");
+        if (_cap == 0 || _admins.length < MULTISIG_THRESHOLD) revert InvalidArgs();
         fundingCap = _cap;
         for (uint256 i = 0; i < _admins.length; i++) {
-            require(_admins[i] != address(0), "Init: zero address admin");
-            require(!isAdmin[_admins[i]], "Init: duplicate admin");
+            if (_admins[i] == address(0)) revert InvalidArgs();
+            if (isAdmin[_admins[i]]) revert AlreadyAdmin();
             admins.push(_admins[i]);
             isAdmin[_admins[i]] = true;
             _adminIndex[_admins[i]] = admins.length;
         }
         
-        minHoldingBlocks = 300; // ~1 hour
+        minHoldingBlocks = 300; 
         lastActivityTimestamp = block.timestamp;
         escrowState = EscrowState.Funding;
     }
@@ -141,8 +162,8 @@ contract StrataDeedRWA is
     }
 
     function confirmAction(bytes32 actionId) external {
-        require(isAdmin[msg.sender], "Auth: admin only");
-        require(!confirmations[actionId][msg.sender], "Multisig: already confirmed");
+        if (!isAdmin[msg.sender]) revert Unauthorized();
+        if (confirmations[actionId][msg.sender]) revert AlreadyAdmin();
         confirmations[actionId][msg.sender] = true;
         emit ActionConfirmed(actionId, msg.sender);
     }
@@ -171,8 +192,8 @@ contract StrataDeedRWA is
 
     function executeFinalizeEscrow() external nonReentrant {
         bytes32 actionId = getActionId("FINALIZE", address(this), 0);
-        require(_isReady(actionId), "Multisig: quorum not met");
-        require(escrowState == EscrowState.Funding, "State: wrong phase");
+        if (!_isReady(actionId)) revert QuorumNotMet();
+        if (escrowState != EscrowState.Funding) revert StateLocked();
 
         totalEscrowRaisedBeforeFinalization = totalEscrowLiability;
         escrowState = EscrowState.Finalized;
@@ -185,7 +206,7 @@ contract StrataDeedRWA is
         _incrementNonce();
         
         (bool success, ) = owner().call{value: payout}("");
-        require(success, "Admin: payout fail");
+        if (!success) revert PayoutFailed();
         
         emit ActionExecuted(actionId, governanceNonce - 1);
         emit EscrowStateUpdate(EscrowState.Finalized);
@@ -193,8 +214,8 @@ contract StrataDeedRWA is
 
     function executeCancelEscrow() external {
         bytes32 actionId = getActionId("CANCEL", address(this), 0);
-        require(_isReady(actionId), "Multisig: quorum not met");
-        require(escrowState == EscrowState.Funding, "State: wrong phase");
+        if (!_isReady(actionId)) revert QuorumNotMet();
+        if (escrowState != EscrowState.Funding) revert StateLocked();
         
         escrowState = EscrowState.Cancelled;
         _clearConfirmations(actionId);
@@ -205,7 +226,7 @@ contract StrataDeedRWA is
 
     function executeSetYieldPaused(bool _paused) external {
         bytes32 actionId = getActionId(_paused ? "YIELD_PAUSE" : "YIELD_UNPAUSE", address(this), 0);
-        require(_isReady(actionId), "Multisig: quorum not met");
+        if (!_isReady(actionId)) revert QuorumNotMet();
 
         yieldPaused = _paused;
         _clearConfirmations(actionId);
@@ -215,7 +236,7 @@ contract StrataDeedRWA is
 
     function executeSetMinHoldingBlocks(uint256 _blocks) external {
         bytes32 actionId = getActionId("SET_HOLDING_BLOCKS", address(this), _blocks);
-        require(_isReady(actionId), "Multisig: quorum not met");
+        if (!_isReady(actionId)) revert QuorumNotMet();
 
         minHoldingBlocks = _blocks;
         _clearConfirmations(actionId);
@@ -224,7 +245,7 @@ contract StrataDeedRWA is
 
     function executeSetYieldDeadline(uint256 _deadline) external {
         bytes32 actionId = getActionId("SET_YIELD_DEADLINE", address(this), _deadline);
-        require(_isReady(actionId), "Multisig: quorum not met");
+        if (!_isReady(actionId)) revert QuorumNotMet();
 
         yieldDeadline = _deadline;
         _clearConfirmations(actionId);
@@ -233,7 +254,7 @@ contract StrataDeedRWA is
 
     function executeSetZKVerifier(address _verifier) external {
         bytes32 actionId = getActionId("SET_VERIFIER", _verifier, 0);
-        require(_isReady(actionId), "Multisig: quorum not met");
+        if (!_isReady(actionId)) revert QuorumNotMet();
         
         zkVerifier = _verifier;
         _clearConfirmations(actionId);
@@ -242,10 +263,10 @@ contract StrataDeedRWA is
     }
 
     function executeAddAdmin(address _newAdmin) external {
-        require(_newAdmin != address(0), "Admin: zero address");
-        require(!isAdmin[_newAdmin], "Already admin");
+        if (_newAdmin == address(0)) revert InvalidArgs();
+        if (isAdmin[_newAdmin]) revert AlreadyAdmin();
         bytes32 actionId = getActionId("ADD_ADMIN", _newAdmin, 0);
-        require(_isReady(actionId), "Multisig: quorum not met");
+        if (!_isReady(actionId)) revert QuorumNotMet();
         
         admins.push(_newAdmin);
         isAdmin[_newAdmin] = true;
@@ -256,10 +277,10 @@ contract StrataDeedRWA is
     }
 
     function executeRemoveAdmin(address _admin) external {
-        require(isAdmin[_admin], "Not admin");
-        require(admins.length > MULTISIG_THRESHOLD, "Multisig: min threshold reached");
+        if (!isAdmin[_admin]) revert InvalidArgs();
+        if (admins.length <= MULTISIG_THRESHOLD) revert MinThreshold();
         bytes32 actionId = getActionId("REMOVE_ADMIN", _admin, 0);
-        require(_isReady(actionId), "Multisig: quorum not met");
+        if (!_isReady(actionId)) revert QuorumNotMet();
 
         isAdmin[_admin] = false;
         uint256 idx = _adminIndex[_admin] - 1;
@@ -277,7 +298,7 @@ contract StrataDeedRWA is
 
     function executeCompliance(address wallet, string calldata action) external {
         bytes32 actionId = getActionId(action, wallet, 0);
-        require(_isReady(actionId), "Multisig: quorum not met");
+        if (!_isReady(actionId)) revert QuorumNotMet();
 
         if (keccak256(bytes(action)) == keccak256("FREEZE")) {
             isWalletFrozen[wallet] = true;
@@ -295,7 +316,7 @@ contract StrataDeedRWA is
 
     function pause() external {
         bytes32 actionId = getActionId("PAUSE", address(this), 0);
-        require(_isReady(actionId), "Multisig: quorum not met");
+        if (!_isReady(actionId)) revert QuorumNotMet();
         _pause();
         _clearConfirmations(actionId);
         _incrementNonce();
@@ -303,7 +324,7 @@ contract StrataDeedRWA is
 
     function unpause() external {
         bytes32 actionId = getActionId("UNPAUSE", address(this), 0);
-        require(_isReady(actionId), "Multisig: quorum not met");
+        if (!_isReady(actionId)) revert QuorumNotMet();
         _unpause();
         _clearConfirmations(actionId);
         _incrementNonce();
@@ -315,7 +336,7 @@ contract StrataDeedRWA is
 
     function _authorizeUpgrade(address newImplementation) internal override {
         bytes32 actionId = getActionId("UPGRADE_PROTOCOL", newImplementation, 0);
-        require(_isReady(actionId), "Multisig: quorum not met to upgrade");
+        if (!_isReady(actionId)) revert QuorumNotMet();
         _clearConfirmations(actionId);
         _incrementNonce();
     }
@@ -325,9 +346,9 @@ contract StrataDeedRWA is
     // =========================================
 
     function depositEscrow() external payable nonReentrant whenNotPaused {
-        require(escrowState == EscrowState.Funding, "Escrow: phase locked");
-        require(isCompliant(msg.sender), "Escrow: non-compliant");
-        require(totalEscrowLiability + msg.value <= fundingCap, "Escrow: cap exceeded");
+        if (escrowState != EscrowState.Funding) revert StateLocked();
+        if (!isCompliant(msg.sender)) revert NonCompliant();
+        if (totalEscrowLiability + msg.value > fundingCap) revert CapExceeded();
 
         escrowDeposits[msg.sender] += msg.value;
         totalEscrowLiability += msg.value;
@@ -335,20 +356,20 @@ contract StrataDeedRWA is
     }
 
     function refundOnCancel() external nonReentrant {
-        require(escrowState == EscrowState.Cancelled, "State: not cancelled");
+        if (escrowState != EscrowState.Cancelled) revert StateLocked();
         uint256 amount = escrowDeposits[msg.sender];
-        require(amount > 0, "No deposit");
+        if (amount == 0) revert NoDeposit();
         
         escrowDeposits[msg.sender] = 0;
         totalEscrowLiability -= amount;
         (bool success, ) = msg.sender.call{value: amount}("");
-        require(success, "Refund failed");
+        if (!success) revert RefundFailed();
     }
 
     function executeEmergencyRefund() external {
         bytes32 actionId = getActionId("EMERGENCY_REFUND", address(this), 0);
-        require(_isReady(actionId), "Multisig: quorum not met");
-        require(block.timestamp > lastActivityTimestamp + EMERGENCY_WINDOW, "Window not open");
+        if (!_isReady(actionId)) revert QuorumNotMet();
+        if (block.timestamp <= lastActivityTimestamp + EMERGENCY_WINDOW) revert WindowNotOpen();
         
         escrowState = EscrowState.Emergency;
         _clearConfirmations(actionId);
@@ -357,17 +378,16 @@ contract StrataDeedRWA is
     }
 
     function claimEmergencyRefund() external nonReentrant {
-        require(escrowState == EscrowState.Emergency, "State: not emergency");
+        if (escrowState != EscrowState.Emergency) revert StateLocked();
         uint256 deposit = escrowDeposits[msg.sender];
-        require(deposit > 0, "No deposit");
-        require(totalEscrowLiability > 0, "No liability");
+        if (deposit == 0) revert NoDeposit();
+        if (totalEscrowLiability == 0) revert InvalidArgs();
         
         uint256 bal = address(this).balance;
         uint256 availableEth = (bal > totalYieldUnclaimed) ? (bal - totalYieldUnclaimed) : 0;
         
-        // Use full balance if availableEth is 0 but totalEscrowLiability exists (yield debt case)
         if (availableEth == 0 && bal > 0) {
-            availableEth = bal; // Distribute whatever is left pro-rata
+            availableEth = bal; 
         }
 
         uint256 refundAmount = (deposit * availableEth) / totalEscrowLiability;
@@ -375,15 +395,15 @@ contract StrataDeedRWA is
         escrowDeposits[msg.sender] = 0;
         totalEscrowLiability -= deposit;
         (bool success, ) = msg.sender.call{value: refundAmount}("");
-        require(success, "Refund failed");
+        if (!success) revert RefundFailed();
     }
 
     function claimTokens(uint256 minTokensExpected) external nonReentrant {
-        require(escrowState == EscrowState.Finalized, "Claim: phase locked");
-        require(block.timestamp <= claimDeadline, "Claim: deadline passed");
-        require(isCompliant(msg.sender), "Claim: non-compliant");
+        if (escrowState != EscrowState.Finalized) revert StateLocked();
+        if (block.timestamp > claimDeadline) revert WindowNotOpen();
+        if (!isCompliant(msg.sender)) revert NonCompliant();
         uint256 deposit = escrowDeposits[msg.sender];
-        require(deposit > 0, "Claim: no deposit");
+        if (deposit == 0) revert NoDeposit();
 
         uint256 remainingTokens = PROPERTY_TOKEN_SUPPLY - totalTokensMinted;
         uint256 remainingEscrow = totalEscrowRaisedBeforeFinalization - totalEscrowProcessed;
@@ -392,8 +412,8 @@ contract StrataDeedRWA is
             remainingTokens : 
             (deposit * PROPERTY_TOKEN_SUPPLY) / totalEscrowRaisedBeforeFinalization;
 
-        require(tokenAmount >= minTokensExpected, "Claim: slippage");
-        require(tokenAmount <= remainingTokens, "Claim: cap");
+        if (tokenAmount < minTokensExpected) revert Slippage();
+        if (tokenAmount > remainingTokens) revert CapExceeded();
 
         escrowDeposits[msg.sender] = 0;
         totalEscrowProcessed += deposit;
@@ -406,13 +426,13 @@ contract StrataDeedRWA is
     }
 
     function claimUnclaimedTokens() external {
-        require(escrowState == EscrowState.Finalized, "Claim: phase locked");
-        require(block.timestamp > claimDeadline, "Claim: deadline not passed");
+        if (escrowState != EscrowState.Finalized) revert StateLocked();
+        if (block.timestamp <= claimDeadline) revert WindowNotOpen();
         bytes32 actionId = getActionId("CLAIM_UNCLAIMED", address(this), 0);
-        require(_isReady(actionId), "Multisig: quorum not met");
+        if (!_isReady(actionId)) revert QuorumNotMet();
 
         uint256 remainingTokens = PROPERTY_TOKEN_SUPPLY - totalTokensMinted;
-        require(remainingTokens > 0, "No tokens left");
+        if (remainingTokens == 0) revert NoTokensLeft();
 
         totalTokensMinted += remainingTokens;
         _mint(owner(), remainingTokens);
@@ -427,8 +447,8 @@ contract StrataDeedRWA is
     // =========================================
 
     function depositYield() external payable onlyOwner {
-        require(!yieldPaused, "Yield: system paused");
-        require(totalSupply() > 0, "Yield: no supply");
+        if (yieldPaused) revert SystemPaused();
+        if (totalSupply() == 0) revert InvalidArgs();
         accYieldPerShare += (msg.value * SCALE) / totalSupply();
         totalYieldUnclaimed += msg.value;
     }
@@ -436,11 +456,11 @@ contract StrataDeedRWA is
     function _update(address from, address to, uint256 amount) internal override {
         if (amount == 0) return;
         if (from != address(0)) {
-            require(isCompliant(from), "Update: non-compliant");
+            if (!isCompliant(from)) revert NonCompliant();
             _accrueYield(from);
         }
         if (to != address(0)) {
-            require(isCompliant(to), "Update: non-compliant");
+            if (!isCompliant(to)) revert NonCompliant();
             _accrueYield(to);
             lastHoldingBlock[to] = block.number;
         }
@@ -465,17 +485,17 @@ contract StrataDeedRWA is
     }
 
     function claimYield(uint256 minAmountExpected) external nonReentrant {
-        require(!yieldPaused, "Yield: system paused");
-        if (yieldDeadline > 0) require(block.timestamp <= yieldDeadline, "Yield: deadline passed");
-        require(isCompliant(msg.sender), "Yield: non-compliant");
+        if (yieldPaused) revert SystemPaused();
+        if (yieldDeadline > 0 && block.timestamp > yieldDeadline) revert WindowNotOpen();
+        if (!isCompliant(msg.sender)) revert NonCompliant();
         _accrueYield(msg.sender);
         uint256 amount = _yieldBalances[msg.sender];
-        require(amount >= minAmountExpected, "Yield: slippage");
-        require(amount > 0, "Yield: empty");
+        if (amount < minAmountExpected) revert Slippage();
+        if (amount == 0) revert InvalidArgs();
         _yieldBalances[msg.sender] = 0;
         totalYieldUnclaimed -= amount;
         (bool success, ) = msg.sender.call{value: amount}("");
-        require(success, "Yield: payout fail");
+        if (!success) revert PayoutFailed();
         emit YieldClaimed(msg.sender, amount);
     }
 
@@ -484,15 +504,15 @@ contract StrataDeedRWA is
     // =========================================
 
     function registerWithZKProof(bytes32 credHash, bytes calldata proof, bytes32 nullifier) external nonReentrant {
-        require(zkVerifier != address(0), "ZK: inactive");
-        require(!usedNullifiers[nullifier], "ZK: replay");
-        require(!credentialHashUsed[credHash], "ZK: identity reuse");
+        if (zkVerifier == address(0)) revert ZKInactive();
+        if (usedNullifiers[nullifier]) revert Replay();
+        if (credentialHashUsed[credHash]) revert IdentityReuse();
         
         bytes32[] memory publicInputs = new bytes32[](2);
         publicInputs[0] = credHash;
         publicInputs[1] = nullifier;
         
-        require(IZKVerifier(zkVerifier).verifyProof(proof, publicInputs), "ZK: fail");
+        if (!IZKVerifier(zkVerifier).verifyProof(proof, publicInputs)) revert ZKFail();
         
         _credentialHashes[msg.sender] = credHash;
         credentialHashUsed[credHash] = true;
@@ -518,8 +538,7 @@ contract StrataDeedRWA is
     }
 
     receive() external payable {
-        // Allow from owner for yield deposits
-        if (msg.sender != owner()) revert("Use depositEscrow()");
+        if (msg.sender != owner()) revert Unauthorized();
     }
 
     uint256[50] private __gap;
