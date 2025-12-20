@@ -43,34 +43,9 @@ export default function PropertyCard({
 	imageUrl,
 }: PropertyCardProps) {
 	const router = useRouter();
-	
+
 	// Simulate funding progress based on ID (just for demo)
 	const fundingProgress = Math.min(100, Math.max(15, (property.id * 13) % 100));
-
-	const handleInvestNow = () => {
-		const params = new URLSearchParams();
-		params.set("title", property.title);
-		params.set("location", property.location);
-		params.set("valuation", property.price.toString());
-		params.set("description", property.description);
-		
-		// Map marketplace types to mint page types
-		let mintType = "residential";
-		if (property.type === "Commercial") {
-			mintType = "commercial";
-		} else if (property.type === "Industrial") {
-			mintType = "industrial";
-		} else if (property.type === "Land") {
-			mintType = "land";
-		} else if (property.type === "Mixed-Use") {
-			mintType = "mixed-use";
-		}
-		
-		params.set("type", mintType);
-		params.set("image", imageUrl);
-
-		router.push(`/mint?${params.toString()}`);
-	};
 
 	return (
 		<div className="group h-full">
@@ -81,8 +56,8 @@ export default function PropertyCard({
 						alt={property.title}
 						className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
 					/>
-					
-                    {/* Overlays */}
+
+					{/* Overlays */}
 					<div className="absolute top-3 left-3 flex flex-wrap gap-2 max-w-[90%]">
 						{property.isFeatured && (
 							<div className="px-2 py-1 bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-[10px] sm:text-xs font-bold uppercase tracking-wider rounded shadow-sm backdrop-blur-sm">
@@ -96,11 +71,13 @@ export default function PropertyCard({
 							</div>
 						)}
 					</div>
-					
+
 					<div className="absolute bottom-3 left-3 right-3 flex justify-between items-end">
 						<div className="flex items-center gap-1 bg-black/70 backdrop-blur-md text-white px-2.5 py-1 rounded-lg text-xs truncate max-w-[65%] border border-white/10">
 							<MapPin className="w-3 h-3 flex-shrink-0 text-gray-300" />
-							<span className="truncate font-medium">{property.location.split(",")[0]}</span>
+							<span className="truncate font-medium">
+								{property.location.split(",")[0]}
+							</span>
 						</div>
 						{property.rating && (
 							<div className="flex items-center gap-1 bg-black/70 backdrop-blur-md text-yellow-400 px-2 py-1 rounded-lg text-xs font-bold border border-white/10 shadow-sm">
@@ -121,9 +98,9 @@ export default function PropertyCard({
 						</p>
 					</div>
 
-                    {/* Stats Grid */}
+					{/* Stats Grid */}
 					<div className="grid grid-cols-3 gap-2 mb-5 p-3 bg-gray-50 dark:bg-gray-900/50 rounded-xl border border-gray-100 dark:border-gray-800">
-						{property.type !== 'Commercial' ? (
+						{property.type !== "Commercial" ? (
 							<>
 								<div className="text-center border-r border-gray-200 dark:border-gray-800">
 									<div className="flex items-center justify-center gap-1.5 text-[10px] sm:text-xs text-gray-500 uppercase font-medium mb-0.5">
@@ -166,40 +143,45 @@ export default function PropertyCard({
 						</div>
 					</div>
 
-                    {/* Funding Progress Bar */}
-                    <div className="mb-5">
-                        <div className="flex justify-between items-center text-xs mb-1.5">
-                            <span className="text-gray-600 dark:text-gray-400 font-medium">Tokenization Progress</span>
-                            <span className="text-blue-600 dark:text-blue-400 font-bold">{fundingProgress}% Funded</span>
-                        </div>
-                        <div className="w-full h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
-                            <div 
-                                className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full transition-all duration-1000 ease-out"
-                                style={{ width: `${fundingProgress}%` }}
-                            />
-                        </div>
-                    </div>
+					{/* Funding Progress Bar */}
+					<div className="mb-5">
+						<div className="flex justify-between items-center text-xs mb-1.5">
+							<span className="text-gray-600 dark:text-gray-400 font-medium">
+								Tokenization Progress
+							</span>
+							<span className="text-blue-600 dark:text-blue-400 font-bold">
+								{fundingProgress}% Funded
+							</span>
+						</div>
+						<div className="w-full h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+							<div
+								className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full transition-all duration-1000 ease-out"
+								style={{ width: `${fundingProgress}%` }}
+							/>
+						</div>
+					</div>
 
 					<div className="mt-auto">
 						<div className="flex justify-between items-end mb-4">
 							<div>
-								<div className="text-[10px] uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-0.5 font-medium">Asset Value</div>
+								<div className="text-[10px] uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-0.5 font-medium">
+									Asset Value
+								</div>
 								<div className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
 									${property.price.toLocaleString()}
 								</div>
 							</div>
 							<div className="text-right">
-								<div className="text-[10px] uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-0.5 font-medium">Min. Buy-in</div>
+								<div className="text-[10px] uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-0.5 font-medium">
+									Min. Buy-in
+								</div>
 								<div className="text-base sm:text-lg font-bold text-emerald-600 dark:text-emerald-400">
 									$50
 								</div>
 							</div>
 						</div>
 
-						<button 
-							onClick={handleInvestNow}
-							className="w-full px-4 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-bold rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 text-sm shadow-xl shadow-gray-200 dark:shadow-none border border-transparent hover:border-gray-800 dark:hover:border-gray-200"
-						>
+						<button className="w-full px-4 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-bold rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 text-sm shadow-xl shadow-gray-200 dark:shadow-none border border-transparent hover:border-gray-800 dark:hover:border-gray-200">
 							Invest Now
 							<ArrowRight className="w-4 h-4" />
 						</button>

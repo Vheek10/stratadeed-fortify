@@ -15,11 +15,10 @@ import {
 	Users,
 	Star,
 	TrendingUp,
-	ArrowUpRight,
-	Calendar,
-	Building,
 	CheckCircle,
 	Info,
+	Building,
+	Calendar,
 } from "lucide-react";
 
 interface Property {
@@ -72,7 +71,10 @@ export default function PropertyCard({
 
 	const formatDate = (dateString: string) => {
 		const date = new Date(dateString);
-		return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+		return date.toLocaleDateString("en-US", {
+			month: "short",
+			year: "numeric",
+		});
 	};
 
 	const getReturnColor = (returnRate?: number) => {
@@ -80,6 +82,14 @@ export default function PropertyCard({
 		if (returnRate >= 10) return "text-emerald-500";
 		if (returnRate >= 5) return "text-blue-500";
 		return "text-amber-500";
+	};
+
+	// Local handler for Details button - doesn't navigate to mint page
+	const handleDetailsClick = () => {
+		// This can be customized based on your needs
+		// For example: open a modal, show more details, etc.
+		console.log("Viewing details for property:", property.id);
+		// You could add: onDetailsClick?.(property.id) if you want a callback
 	};
 
 	return (
@@ -128,9 +138,7 @@ export default function PropertyCard({
 							}`}>
 							<Heart
 								className={`w-4 h-4 ${
-									isInWishlist
-										? "fill-red-500 text-red-500"
-										: "text-white"
+									isInWishlist ? "fill-red-500 text-red-500" : "text-white"
 								}`}
 							/>
 						</button>
@@ -210,28 +218,36 @@ export default function PropertyCard({
 							<div className="text-sm sm:text-base font-bold text-gray-900 dark:text-white">
 								{property.bedrooms}
 							</div>
-							<div className="text-[10px] xs:text-xs text-gray-500 font-medium">Beds</div>
+							<div className="text-[10px] xs:text-xs text-gray-500 font-medium">
+								Beds
+							</div>
 						</div>
 						<div className="text-center p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-900/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
 							<Bath className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-500 mx-auto mb-1 sm:mb-1.5" />
 							<div className="text-sm sm:text-base font-bold text-gray-900 dark:text-white">
 								{property.bathrooms}
 							</div>
-							<div className="text-[10px] xs:text-xs text-gray-500 font-medium">Baths</div>
+							<div className="text-[10px] xs:text-xs text-gray-500 font-medium">
+								Baths
+							</div>
 						</div>
 						<div className="text-center p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-900/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
 							<Square className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500 mx-auto mb-1 sm:mb-1.5" />
 							<div className="text-sm sm:text-base font-bold text-gray-900 dark:text-white">
 								{property.squareFeet.toLocaleString()}
 							</div>
-							<div className="text-[10px] xs:text-xs text-gray-500 font-medium">Sqft</div>
+							<div className="text-[10px] xs:text-xs text-gray-500 font-medium">
+								Sqft
+							</div>
 						</div>
 						<div className="text-center p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-900/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
 							<Users className="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mx-auto mb-1 sm:mb-1.5" />
 							<div className="text-sm sm:text-base font-bold text-gray-900 dark:text-white">
 								{property.capacity}
 							</div>
-							<div className="text-[10px] xs:text-xs text-gray-500 font-medium">Capacity</div>
+							<div className="text-[10px] xs:text-xs text-gray-500 font-medium">
+								Capacity
+							</div>
 						</div>
 					</div>
 
@@ -254,7 +270,8 @@ export default function PropertyCard({
 									)}
 								</div>
 								<div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-									${calculatePricePerSqFt(property.price, property.squareFeet)}/sqft
+									${calculatePricePerSqFt(property.price, property.squareFeet)}
+									/sqft
 								</div>
 							</div>
 							{property.investmentReturn && (
@@ -262,7 +279,10 @@ export default function PropertyCard({
 									<div className="text-xs text-gray-500">Est. ROI</div>
 									<div className="flex items-center gap-1">
 										<TrendingUp className="w-4 h-4 text-emerald-500" />
-										<div className={`text-lg font-bold ${getReturnColor(property.investmentReturn)}`}>
+										<div
+											className={`text-lg font-bold ${getReturnColor(
+												property.investmentReturn,
+											)}`}>
 											{property.investmentReturn}%
 										</div>
 									</div>
@@ -270,7 +290,7 @@ export default function PropertyCard({
 							)}
 						</div>
 
-						{/* Action Buttons */}
+						{/* Action Buttons - No "Invest Now" or mint page linking */}
 						<div className="flex flex-col xs:flex-row gap-2">
 							{isInCart ? (
 								<button
@@ -287,7 +307,9 @@ export default function PropertyCard({
 									Add to Portfolio
 								</button>
 							)}
-							<button className="px-4 py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:border-blue-500 dark:hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 min-h-[48px] xs:flex-none xs:w-auto w-full">
+							<button
+								onClick={handleDetailsClick}
+								className="px-4 py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:border-blue-500 dark:hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 min-h-[48px] xs:flex-none xs:w-auto w-full">
 								<Info className="w-4 h-4" />
 								Details
 							</button>

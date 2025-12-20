@@ -16,8 +16,7 @@ export const sampleProperties = [
 		views: 245,
 		isFeatured: true,
 		createdAt: "2024-01-15",
-		image:
-			"/images/unsplash-7fde63acd811.jpg",
+		image: "/images/unsplash-7fde63acd811.jpg",
 		country: "USA",
 		investmentReturn: 8.5,
 		rating: 4.8,
@@ -37,8 +36,7 @@ export const sampleProperties = [
 		views: 189,
 		isFeatured: false,
 		createdAt: "2024-01-20",
-		image:
-			"/images/unsplash-cc1a3fa10c00.jpg",
+		image: "/images/unsplash-cc1a3fa10c00.jpg",
 		country: "USA",
 		investmentReturn: 7.2,
 		rating: 4.5,
@@ -58,8 +56,7 @@ export const sampleProperties = [
 		views: 312,
 		isFeatured: true,
 		createdAt: "2024-02-10",
-		image:
-			"/images/unsplash-8bab748fbf90.jpg",
+		image: "/images/unsplash-8bab748fbf90.jpg",
 		country: "Indonesia",
 		investmentReturn: 12.5,
 		rating: 4.9,
@@ -79,8 +76,7 @@ export const sampleProperties = [
 		views: 421,
 		isFeatured: true,
 		createdAt: "2024-01-05",
-		image:
-			"/images/unsplash-37526070297c.jpg",
+		image: "/images/unsplash-37526070297c.jpg",
 		country: "UK",
 		investmentReturn: 6.8,
 		rating: 4.7,
@@ -100,8 +96,7 @@ export const sampleProperties = [
 		views: 278,
 		isFeatured: false,
 		createdAt: "2024-02-15",
-		image:
-			"/images/unsplash-67f85cf4f1df.jpg",
+		image: "/images/unsplash-67f85cf4f1df.jpg",
 		country: "Switzerland",
 		investmentReturn: 9.2,
 		rating: 4.6,
@@ -121,8 +116,7 @@ export const sampleProperties = [
 		views: 345,
 		isFeatured: true,
 		createdAt: "2024-02-01",
-		image:
-			"/images/unsplash-f609979314bd.jpg",
+		image: "/images/unsplash-f609979314bd.jpg",
 		country: "Japan",
 		investmentReturn: 10.5,
 		rating: 4.8,
@@ -142,8 +136,7 @@ export const sampleProperties = [
 		views: 512,
 		isFeatured: false,
 		createdAt: "2024-01-25",
-		image:
-			"/images/unsplash-9991f1c4c750.jpg",
+		image: "/images/unsplash-9991f1c4c750.jpg",
 		country: "UAE",
 		investmentReturn: 11.2,
 		rating: 4.4,
@@ -163,8 +156,7 @@ export const sampleProperties = [
 		views: 198,
 		isFeatured: true,
 		createdAt: "2024-02-20",
-		image:
-			"/images/unsplash-ebfd161ef9cf.jpg",
+		image: "/images/unsplash-ebfd161ef9cf.jpg",
 		country: "Costa Rica",
 		investmentReturn: 15.3,
 		rating: 4.9,
@@ -184,8 +176,7 @@ export const sampleProperties = [
 		views: 389,
 		isFeatured: false,
 		createdAt: "2024-01-30",
-		image:
-			"/images/unsplash-068cd1dbfeeb.jpg",
+		image: "/images/unsplash-068cd1dbfeeb.jpg",
 		country: "France",
 		investmentReturn: 6.5,
 		rating: 4.7,
@@ -205,8 +196,7 @@ export const sampleProperties = [
 		views: 467,
 		isFeatured: true,
 		createdAt: "2024-02-05",
-		image:
-			"/images/unsplash-112f2f40a3f4.jpg",
+		image: "/images/unsplash-112f2f40a3f4.jpg",
 		country: "Australia",
 		investmentReturn: 8.9,
 		rating: 4.8,
@@ -226,8 +216,7 @@ export const sampleProperties = [
 		views: 234,
 		isFeatured: false,
 		createdAt: "2024-02-12",
-		image:
-			"/images/unsplash-bb926046304a.jpg",
+		image: "/images/unsplash-bb926046304a.jpg",
 		country: "Singapore",
 		investmentReturn: 7.8,
 		rating: 4.6,
@@ -247,8 +236,7 @@ export const sampleProperties = [
 		views: 156,
 		isFeatured: true,
 		createdAt: "2024-02-18",
-		image:
-			"/images/unsplash-c6227db76b6e.jpg",
+		image: "/images/unsplash-c6227db76b6e.jpg",
 		country: "Canada",
 		investmentReturn: 9.5,
 		rating: 4.7,
@@ -268,8 +256,7 @@ export const sampleProperties = [
 		views: 289,
 		isFeatured: false,
 		createdAt: "2024-01-22",
-		image:
-			"/images/unsplash-fcd25c85cd64.jpg",
+		image: "/images/unsplash-fcd25c85cd64.jpg",
 		country: "Spain",
 		investmentReturn: 8.2,
 		rating: 4.5,
@@ -289,8 +276,7 @@ export const sampleProperties = [
 		views: 678,
 		isFeatured: true,
 		createdAt: "2024-02-25",
-		image:
-			"/images/unsplash-6a8506099945.jpg",
+		image: "/images/unsplash-6a8506099945.jpg",
 		country: "Maldives",
 		investmentReturn: 18.5,
 		rating: 4.9,
@@ -310,8 +296,7 @@ export const sampleProperties = [
 		views: 123,
 		isFeatured: false,
 		createdAt: "2024-02-08",
-		image:
-			"/images/unsplash-f200968a6e72.jpg",
+		image: "/images/unsplash-f200968a6e72.jpg",
 		country: "Germany",
 		investmentReturn: 9.8,
 		rating: 4.4,
