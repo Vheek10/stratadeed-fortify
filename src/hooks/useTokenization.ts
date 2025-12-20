@@ -1,11 +1,11 @@
-// hooks/useTokenization.ts - Fixed version
+// hooks/useTokenization.ts - Fix the BigInt issue
 "use client";
 
 import { useState } from 'react';
 import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { parseEventLogs } from 'viem';
 
-// Your contract ABI - Make sure this matches your actual contract
+// Your contract ABI
 const TOKENIZATION_ABI = [
   {
     "anonymous": false,
@@ -121,8 +121,8 @@ export function useTokenization() {
         owner
       });
 
-      // Convert mintFee to Wei (if needed)
-      const feeWei = BigInt(mintFee) || 0n;
+      // Convert mintFee to Wei (using BigInt constructor without literal)
+      const feeWei = BigInt(mintFee) || BigInt(0); // Changed from 0n to BigInt(0)
 
       // Call the contract
       const hash = await writeContractAsync({
