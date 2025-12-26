@@ -45,3 +45,18 @@ next-env.d.ts
 broadcast/
 cache_forge/
 cache/
+
+# Foundry / Forge artifacts and deps
+# build outputs and compiled artifacts
+artifacts/
+out/
+
+# local forge/cache
+cache/
+cache_forge/
+
+# broadcast run output
+broadcast/**/run-*.json
+
+# optional local libraries vendored for tests
+lib/forge-std/
