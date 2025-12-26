@@ -200,7 +200,7 @@ export function useTokenization() {
 				err.message?.includes("reverted")
 			) {
 				// For any contract revert, show incorrect credentials
-				errorMessage = "incorrect credentials";
+				errorMessage = "incorrect property information";
 			} else if (err.message) {
 				errorMessage = "incorrect credentials";
 			}
