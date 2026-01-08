@@ -3,6 +3,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { CheckCircle, XCircle, ArrowRight } from "lucide-react";
 
 const comparisons = [
@@ -144,10 +145,10 @@ export default function ComparisonSection() {
 							</div>
 
 							{active === 2 && (
-								<button className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+								<Link href="/dashboard" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
 									<span>Get Started</span>
 									<ArrowRight className="w-5 h-5" />
-								</button>
+								</Link>
 							)}
 						</div>
 					</div>

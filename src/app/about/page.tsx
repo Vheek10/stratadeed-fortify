@@ -155,7 +155,7 @@ export default function About() {
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link
-                  href="/signup"
+                  href="/dashboard"
                   className="group inline-flex items-center justify-center gap-3 px-5 sm:px-6 py-2.5 sm:py-3 bg-linear-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 text-sm sm:text-base"
                 >
                   <span>Get Started</span>
@@ -396,7 +396,7 @@ export default function About() {
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <Link
-                href="/signup"
+                href="/dashboard"
                 className="inline-flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-8 py-2.5 sm:py-3 bg-linear-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 text-sm sm:text-base"
               >
                 <span>Start Investing</span>

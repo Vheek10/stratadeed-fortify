@@ -11,6 +11,7 @@ import {
 	Globe,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { getRandomImage } from "@/utils/realEstateImages";
 
