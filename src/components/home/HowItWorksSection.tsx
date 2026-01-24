@@ -11,9 +11,9 @@ import {
 	Globe,
 } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useState, useEffect } from "react";
 import { getRandomImage } from "@/utils/realEstateImages";
+import { motion, AnimatePresence } from "framer-motion";
 
 const steps = [
 	{
@@ -21,7 +21,7 @@ const steps = [
 		icon: FileCheck,
 		title: "Digitize Property",
 		description:
-			"Transform real estate into secure digital tokens with automated verification",
+			"Transform real estate into secure digital tokens with automated verification and off-chain compliance checks.",
 		color: "blue",
 		imageCategory: "modern-buildings",
 		stats: ["<48h Verification", "99.8% Success"],
@@ -31,7 +31,7 @@ const steps = [
 		icon: Shield,
 		title: "Secure Investment",
 		description:
-			"Fractional ownership through blockchain-powered smart contracts",
+			"Fractional ownership through blockchain-powered smart contracts, ensuring immutable proof of ownership.",
 		color: "emerald",
 		imageCategory: "blockchain-tech",
 		stats: ["Global 24/7 Access", "0 Disputes"],
@@ -40,10 +40,10 @@ const steps = [
 		number: "03",
 		icon: Database,
 		title: "Track & Manage",
-		description: "Real-time transparency with immutable blockchain records",
+		description: "Real-time transparency with immutable blockchain records and automated yield distribution.",
 		color: "cyan",
 		imageCategory: "cityscapes",
-		stats: ["<2min Transactions", "Bank-grade Security"],
+		stats: ["<1s Finality", "Bank-grade Security"],
 	},
 ];
 
@@ -66,11 +66,11 @@ export default function HowItWorksSection() {
 
 	if (!images.length) {
 		return (
-			<section className="py-20 px-4 sm:px-6 bg-gray-900">
+			<section className="py-20 px-4 sm:px-6 bg-gray-950">
 				<div className="max-w-6xl mx-auto">
 					<div className="animate-pulse space-y-8">
-						<div className="h-12 bg-gray-800 rounded-lg w-1/3 mx-auto"></div>
-						<div className="h-6 bg-gray-800 rounded w-2/3 mx-auto"></div>
+						<div className="h-12 bg-gray-900 rounded-lg w-1/3 mx-auto"></div>
+						<div className="h-6 bg-gray-900 rounded w-2/3 mx-auto"></div>
 					</div>
 				</div>
 			</section>
@@ -78,149 +78,200 @@ export default function HowItWorksSection() {
 	}
 
 	return (
-		<section className="py-16 sm:py-24 px-4 sm:px-6 bg-gray-900">
-			<div className="max-w-6xl mx-auto">
+		<section className="py-24 sm:py-32 px-4 sm:px-6 bg-gray-950 relative overflow-hidden">
+			{/* Decorative elements */}
+			<div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-500/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
+			<div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-cyan-500/5 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2" />
+
+			<div className="max-w-7xl mx-auto relative z-10">
 				{/* Header */}
-				<div className="text-center mb-12 sm:mb-16">
-					<h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
-						How It Works
+				<motion.div 
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true }}
+					transition={{ duration: 0.6 }}
+					className="text-center mb-16 sm:mb-20">
+					<h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6 tracking-tight">
+						The StrataDeed <span className="text-blue-500">Process</span>
 					</h2>
-					<p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto">
-						Transform real estate into accessible digital assets in three simple
-						steps
+					<p className="text-xl text-gray-400 max-w-3xl mx-auto font-light leading-relaxed">
+						Tokenizing real estate doesn't have to be complicated. Our institutional-grade 
+						infrastructure handles the complexity so you can focus on growth.
 					</p>
-				</div>
+				</motion.div>
 
 				{/* Steps Navigation */}
-				<div className="flex flex-col sm:flex-row gap-4 mb-12">
+				<div className="flex flex-col md:flex-row gap-4 mb-16">
 					{steps.map((step, index) => (
-						<button
+						<motion.button
 							key={step.number}
+							initial={{ opacity: 0, x: -20 }}
+							whileInView={{ opacity: 1, x: 0 }}
+							viewport={{ once: true }}
+							transition={{ delay: index * 0.1 }}
 							onClick={() => handleStepChange(index)}
-							className={`flex items-center gap-4 p-4 rounded-xl transition-all ${
+							className={`flex-1 flex items-center gap-5 p-6 rounded-3xl transition-all duration-500 border ${
 								activeStep === index
-									? `bg-gradient-to-r from-${step.color}-600 to-${step.color}-500 text-white shadow-lg`
-									: "bg-gray-800 text-gray-300 hover:bg-gray-700"
+									? "bg-white/5 border-blue-500/40 shadow-[0_0_30px_rgba(59,130,246,0.15)] backdrop-blur-xl"
+									: "bg-transparent border-white/5 text-gray-400 hover:bg-white/5 hover:border-white/10"
 							}`}>
 							<div
-								className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+								className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-500 ${
 									activeStep === index
-										? "bg-white/20"
-										: `bg-${step.color}-500/10`
+										? "bg-blue-600 shadow-[0_0_20px_rgba(37,99,235,0.4)]"
+										: "bg-white/5"
 								}`}>
 								<step.icon
-									className={`w-5 h-5 ${
+									className={`w-7 h-7 transition-all duration-500 ${
 										activeStep === index
-											? "text-white"
-											: `text-${step.color}-400`
+											? "text-white scale-110"
+											: "text-gray-500"
 									}`}
 								/>
 							</div>
 							<div className="text-left">
-								<div className="text-sm font-medium">Step {step.number}</div>
-								<div className="font-semibold">{step.title}</div>
+								<div className={`text-xs font-black uppercase tracking-widest mb-1 ${
+									activeStep === index ? "text-blue-400" : "text-gray-600"
+								}`}>
+									Step {step.number}
+								</div>
+								<div className={`text-xl font-bold ${
+									activeStep === index ? "text-white" : "text-gray-400"
+								}`}>
+									{step.title}
+								</div>
 							</div>
-						</button>
+						</motion.button>
 					))}
 				</div>
 
-				{/* Main Content */}
-				<div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
-					{/* Image */}
-					<div className="relative aspect-square lg:aspect-[4/3] rounded-2xl overflow-hidden">
-						<Image
-							src={images[activeStep]}
-							alt={currentStep.title}
-							fill
-							className="object-cover"
-							sizes="(max-width: 768px) 100vw, 50vw"
-						/>
-						<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-						<div className="absolute top-6 left-6">
-							<div
-								className={`bg-gradient-to-r from-${currentStep.color}-600 to-${currentStep.color}-500 px-4 py-2 rounded-lg text-white font-bold`}>
-								{currentStep.number}
+				{/* Main Content Area */}
+				<div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+					{/* Image Side */}
+					<div className="lg:col-span-7">
+						<div className="relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-[4/3] rounded-[40px] overflow-hidden group shadow-2xl border border-white/10">
+							<AnimatePresence mode="wait">
+								<motion.div
+									key={activeStep}
+									initial={{ opacity: 0, scale: 1.1 }}
+									animate={{ opacity: 1, scale: 1 }}
+									exit={{ opacity: 0, scale: 0.95 }}
+									transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+									className="absolute inset-0">
+									<Image
+										src={images[activeStep]}
+										alt={currentStep.title}
+										fill
+										className="object-cover transition-transform duration-1000 group-hover:scale-105"
+										sizes="(max-width: 1024px) 100vw, 60vw"
+									/>
+									<div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-80" />
+								</motion.div>
+							</AnimatePresence>
+							
+							{/* Floating Overlay Info */}
+							<div className="absolute bottom-10 left-10 p-1">
+								<motion.div 
+									key={activeStep}
+									initial={{ opacity: 0, y: 20 }}
+									animate={{ opacity: 1, y: 0 }}
+									transition={{ delay: 0.4 }}
+									className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 rounded-3xl shadow-2xl inline-block max-w-xs">
+									<div className="text-blue-400 font-bold text-sm uppercase tracking-widest mb-2">Live Status</div>
+									<div className="text-white text-lg font-bold mb-4">Verification in progress for property SD-42793</div>
+									<div className="flex gap-2">
+										<div className="h-1.5 w-12 bg-blue-500 rounded-full" />
+										<div className="h-1.5 w-12 bg-blue-500 rounded-full" />
+										<div className="h-1.5 w-12 bg-white/20 rounded-full" />
+									</div>
+								</motion.div>
 							</div>
 						</div>
 					</div>
 
-					{/* Content */}
-					<div className="flex flex-col justify-center">
-						<div className="space-y-6">
-							<div>
-								<h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-									{currentStep.title}
-								</h3>
-								<p className="text-lg text-gray-300">
-									{currentStep.description}
-								</p>
-							</div>
+					{/* Content Side */}
+					<div className="lg:col-span-5">
+						<AnimatePresence mode="wait">
+							<motion.div
+								key={activeStep}
+								initial={{ opacity: 0, x: 40 }}
+								animate={{ opacity: 1, x: 0 }}
+								exit={{ opacity: 0, x: -40 }}
+								transition={{ duration: 0.5, ease: "easeOut" }}
+								className="space-y-8">
+								<div>
+									<h3 className="text-4xl sm:text-5xl font-black text-white mb-6 leading-tight">
+										{currentStep.title}
+									</h3>
+									<p className="text-xl text-gray-400 font-light leading-relaxed">
+										{currentStep.description}
+									</p>
+								</div>
 
-							{/* Stats */}
-							<div className="flex gap-4">
-								{currentStep.stats.map((stat, index) => (
-									<div
-										key={index}
-										className="bg-gray-800/50 rounded-lg p-4 flex-1 border border-gray-700">
-										<div className="text-xl font-bold text-white mb-1">
-											{stat.split(" ")[0]}
-										</div>
-										<div className="text-sm text-gray-400">
-											{stat.split(" ").slice(1).join(" ")}
-										</div>
-									</div>
-								))}
-							</div>
+								{/* Dynamic Stats Grid */}
+								<div className="grid grid-cols-2 gap-4">
+									{currentStep.stats.map((stat, index) => (
+										<motion.div
+											key={index}
+											initial={{ opacity: 0, y: 10 }}
+											animate={{ opacity: 1, y: 0 }}
+											transition={{ delay: 0.3 + index * 0.1 }}
+											className="bg-white/5 backdrop-blur-sm rounded-3xl p-6 border border-white/10 hover:bg-white/10 transition-colors group cursor-default">
+											<div className="text-2xl font-black text-white mb-1 group-hover:text-blue-400 transition-colors">
+												{stat.split(" ")[0]}
+											</div>
+											<div className="text-sm text-gray-500 font-bold uppercase tracking-widest whitespace-nowrap">
+												{stat.split(" ").slice(1).join(" ")}
+											</div>
+										</motion.div>
+									))}
+								</div>
 
-							{/* Step Indicators */}
-							<div className="flex items-center gap-4">
-								{steps.map((_, index) => (
-									<button
-										key={index}
-										onClick={() => handleStepChange(index)}
-										className={`w-3 h-3 rounded-full transition-all ${
-											activeStep === index
-												? `bg-${currentStep.color}-500 scale-125`
-												: "bg-gray-600 hover:bg-gray-500"
-										}`}
-										aria-label={`Go to step ${index + 1}`}
-									/>
-								))}
-							</div>
-
-							{/* CTA */}
-							<div className="pt-6">
-								<button className="group inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300">
-									<span>Get Started</span>
-									<ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-								</button>
-							</div>
-						</div>
+								{/* CTA Button */}
+								<div className="pt-4">
+									<button className="group flex items-center gap-4 px-10 py-5 bg-blue-600 hover:bg-blue-500 text-white font-black rounded-2xl shadow-[0_20px_40px_rgba(37,99,235,0.2)] transition-all duration-500 overflow-hidden relative">
+										<div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-white/10 to-blue-400/0 group-hover:animate-shimmer" />
+										<span className="relative z-10 text-lg">Digitize Now</span>
+										<ArrowRight className="relative z-10 w-6 h-6 group-hover:translate-x-2 transition-transform duration-500" />
+									</button>
+								</div>
+							</motion.div>
+						</AnimatePresence>
 					</div>
 				</div>
 
-				{/* Bottom Stats */}
-				<div className="mt-16 pt-8 border-t border-gray-800">
-					<div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+				{/* Trust Badges Bar */}
+				<motion.div 
+					initial={{ opacity: 0 }}
+					whileInView={{ opacity: 1 }}
+					viewport={{ once: true }}
+					className="mt-24 pt-12 border-t border-white/5">
+					<div className="grid grid-cols-2 md:grid-cols-4 gap-8">
 						{[
-							{ icon: CheckCircle, value: "25K+", label: "Properties" },
-							{ icon: Globe, value: "45+", label: "Countries" },
-							{ icon: Zap, value: "<2s", label: "Transactions" },
-							{ icon: Shield, value: "100%", label: "Secure" },
+							{ icon: CheckCircle, value: "25K+", label: "Verified Deeds" },
+							{ icon: Globe, value: "45+", label: "Tokenized Regions" },
+							{ icon: Zap, value: "<1s", label: "Tx Finality" },
+							{ icon: Shield, value: "100%", label: "Compliant" },
 						].map((stat, index) => (
-							<div
+							<motion.div
 								key={index}
-								className="text-center p-4">
-								<stat.icon className="w-8 h-8 text-cyan-400 mx-auto mb-3" />
-								<div className="text-2xl font-bold text-white mb-1">
+								whileHover={{ y: -5 }}
+								className="text-center group">
+								<div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:bg-blue-600/10 transition-colors">
+									<stat.icon className="w-7 h-7 text-blue-500" />
+								</div>
+								<div className="text-3xl font-black text-white mb-1 tracking-tight">
 									{stat.value}
 								</div>
-								<div className="text-sm text-gray-400">{stat.label}</div>
-							</div>
+								<div className="text-xs text-gray-500 font-black uppercase tracking-[0.2em]">
+									{stat.label}
+								</div>
+							</motion.div>
 						))}
 					</div>
-				</div>
+				</motion.div>
 			</div>
 		</section>
 	);
 }
+

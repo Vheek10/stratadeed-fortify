@@ -2,17 +2,17 @@
 
 import { http } from "wagmi";
 import { getDefaultConfig } from "@rainbow-me/rainbowkit";
-import { mantle, mantleSepoliaTestnet } from "viem/chains";
+import { etherlink, etherlinkTestnet } from "@/config/chains/etherlink";
 
 export const config = getDefaultConfig({
-	appName: "StrataDeed",
+	appName: "StrataDeed on Etherlink",
 	projectId:
 		process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID ||
 		"47828de378396c21a4fb4a2da529712a", // Fallback ID for build time
-	chains: [mantleSepoliaTestnet, mantle],
+	chains: [etherlinkTestnet, etherlink],
 	transports: {
-		[mantleSepoliaTestnet.id]: http("https://rpc.sepolia.mantle.xyz"),
-		[mantle.id]: http("https://rpc.mantle.xyz"),
+		[etherlinkTestnet.id]: http("https://node.ghostnet.etherlink.com"),
+		[etherlink.id]: http("https://node.mainnet.etherlink.com"),
 	},
 	ssr: false,
 });

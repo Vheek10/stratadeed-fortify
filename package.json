@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "deploy:mantle": "hardhat run scripts/deploy.js --network mantleSepolia",
+    "deploy:etherlink:testnet": "hardhat run scripts/deploy-etherlink.js --network etherlinkTestnet",
+    "deploy:etherlink:mainnet": "hardhat run scripts/deploy-etherlink.js --network etherlinkMainnet",
+    "verify:etherlink": "hardhat verify --network etherlinkTestnet",
     "test:contracts": "hardhat test",
     "compile": "hardhat compile",
     "test": "hardhat test"

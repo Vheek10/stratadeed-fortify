@@ -1,0 +1,125 @@
+# IMPORTANT: Before this workflow can push commits, go to your repo → Settings → Actions → General → Workflow permissions → select 'Read and write permissions' → Allow GitHub Actions to create and approve pull requests → Save. Otherwise pushes will fail with permission error.
+
+name: Auto Realistic Progress
+
+on:
+  schedule:
+    - cron: '15 6 * * *'
+    - cron: '32 8 * * *'
+    - cron: '50 9 * * *'
+    - cron: '10 11 * * *'
+    - cron: '45 12 * * *'
+    - cron: '20 14 * * *'
+    - cron: '55 15 * * *'
+    - cron: '30 17 * * *'
+    - cron: '45 18 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  steady-progress:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Make small realistic change
+        id: change
+        shell: python
+        run: |
+          import random
+          import datetime
+          import os
+
+          # 45% chance to skip
+          if random.random() < 0.45:
+              print('Skipping run for realism...')
+              with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+                  f.write("changed=false\n")
+              exit(0)
+
+          # Potential files (adjusted for src/ directory structure typical of Next.js)
+          target_files = [
+              'README.md',
+              'src/app/page.tsx',
+              'src/app/layout.tsx',
+              'src/app/globals.css',
+              'src/components/Navbar.tsx',
+              'src/components/Footer.tsx',
+              'src/lib/utils.ts',
+              'src/lib/dummy-data.ts',
+              'tailwind.config.ts',
+              'next.config.mjs',
+              'package.json',
+              'tsconfig.json'
+          ]
+          
+          # Include user's specific list in case src/ is not used
+          target_files += [
+              'app/page.tsx', 'app/layout.tsx', 'components/Header.tsx', 
+              'components/ui/Button.tsx', 'components/Card.tsx', 'lib/utils.ts', 
+              'utils/cn.ts', 'app/globals.css'
+          ]
+
+          existing_files = [f for f in target_files if os.path.exists(f)]
+
+          if not existing_files:
+              print('No target files found. Skipping...')
+              with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+                  f.write("changed=false\n")
+              exit(0)
+
+          target = random.choice(existing_files)
+          timestamp = datetime.datetime.now().isoformat()
+          
+          changes = [
+              f'\n// Minor progress tweak {timestamp}\n',
+              '\n// TODO: expand this feature logic later\n',
+              '\n/* Tailwind style refinement notes */\n',
+              '\n\n', # Empty line
+              '\n// import { cn } from "@/lib/utils" // safety check\n',
+              '\n/** @description Maintenance update */\n',
+              '\n// Housekeeping: indentation and formatting\n'
+          ]
+          
+          change = random.choice(changes)
+          
+          with open(target, 'a', encoding='utf-8') as f:
+              f.write(change)
+          
+          msgs = [
+              'chore: minor cleanup', 
+              'refactor: small variable rename', 
+              'docs: add progress note', 
+              'style: tweak tailwind classes', 
+              'fix: minor typo in comment', 
+              'feat(wip): stub next feature', 
+              'perf: tiny optimization'
+          ]
+          msg = random.choice(msgs)
+          
+          print(f'Modified {target} with change type: {msg}')
+          
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write("changed=true\n")
+              f.write(f"msg={msg}\n")
+
+      - name: Commit and Push
+        if: steps.change.outputs.changed == 'true'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: ${{ steps.change.outputs.msg }}
+          branch: main
+          commit_user_name: Vheek
+          commit_user_email: jeremiahvictorgp@gmail.com
+          commit_author: vheek10 <jeremiahvictorgp@gmail.com>
+          skip_dirty_check: false

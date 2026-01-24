@@ -7,7 +7,7 @@ import { getAllProperties } from "../../lib/propertyStorage";
 import type { Property } from "../../lib/dummy-data";
 import { Search, X } from "lucide-react";
 
-import AuthGuard from "@/components/AuthGuard";
+
 
 // Components
 import MarketplaceHeader from "../../components/marketplace/MarketplaceHeader";
@@ -70,7 +70,6 @@ export default function MarketplacePage() {
 	};
 
 	return (
-		<AuthGuard>
 			<div className="min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
 					{/* Header */}
@@ -115,6 +114,5 @@ export default function MarketplacePage() {
 					</div>
 				</div>
 			</div>
-		</AuthGuard>
 	);
 }

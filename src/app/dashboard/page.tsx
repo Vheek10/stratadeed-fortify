@@ -14,7 +14,7 @@ import {
 	recentActivities,
 	portfolioDistribution,
 } from "../../components/dashboard";
-import AuthGuard from "@/components/AuthGuard";
+
 import { sampleProperties } from "../../lib/dummy-data";
 
 export default function Dashboard() {
@@ -28,7 +28,6 @@ export default function Dashboard() {
 	const monthlyGrowth = 12.5;
 
 	return (
-		<AuthGuard>
 			<div className="min-h-screen bg-gray-50 dark:bg-gray-950">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 					<DashboardTabs
@@ -83,6 +82,5 @@ export default function Dashboard() {
 					)}
 				</div>
 			</div>
-		</AuthGuard>
 	);
 }

@@ -27,7 +27,7 @@ import { keccak256, encodePacked } from "viem";
 import { useTokenization } from "@/hooks/useTokenization";
 import { useStrataDeed } from "@/hooks/useStrataDeed";
 import { useRouter } from "next/navigation";
-import AuthGuard from "@/components/AuthGuard";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { saveProperty, getNextPropertyId } from "@/lib/propertyStorage";
 import { sampleProperties } from "@/lib/dummy-data";
@@ -1347,25 +1347,23 @@ const MintFormWithErrorBoundary = withErrorBoundary(MintFormContent);
 // Main Page Component
 export default function MintPage() {
 	return (
-		<AuthGuard>
-			<Suspense
-				fallback={
-					<div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
-						<div className="text-center">
-							<div className="w-16 h-16 mx-auto mb-4 relative">
-								<Loader2 className="w-16 h-16 text-blue-600 dark:text-blue-400 animate-spin" />
-							</div>
-							<h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-								Loading Mint Page
-							</h3>
-							<p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-								Preparing your property minting experience...
-							</p>
+		<Suspense
+			fallback={
+				<div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
+					<div className="text-center">
+						<div className="w-16 h-16 mx-auto mb-4 relative">
+							<Loader2 className="w-16 h-16 text-blue-600 dark:text-blue-400 animate-spin" />
 						</div>
+						<h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+							Loading Mint Page
+						</h3>
+						<p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+							Preparing your property minting experience...
+						</p>
 					</div>
-				}>
-				<MintFormWithErrorBoundary />
-			</Suspense>
-		</AuthGuard>
+				</div>
+			}>
+			<MintFormWithErrorBoundary />
+		</Suspense>
 	);
 }
