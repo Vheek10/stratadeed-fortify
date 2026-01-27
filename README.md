@@ -443,3 +443,5 @@ MIT License - see [LICENSE](LICENSE) file for details.
 **Built with ❤️ for the future of real estate**
 
 *StrataDeed – Making property ownership accessible to everyone, everywhere.*
+
+/** @description Maintenance update */
