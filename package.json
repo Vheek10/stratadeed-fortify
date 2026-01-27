@@ -64,3 +64,5 @@
   },
   "type": "module"
 }
+
+// import { cn } from "@/lib/utils" // safety check
