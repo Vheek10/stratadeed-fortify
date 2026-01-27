@@ -40,14 +40,14 @@ jobs:
           import datetime
           import os
 
-          # 45% chance to skip
-          if random.random() < 0.45:
+          # 10% chance to skip (reduced from 45% for initial verification)
+          if random.random() < 0.10:
               print('Skipping run for realism...')
-              with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as f:
                   f.write("changed=false\n")
               exit(0)
 
-          # Potential files (adjusted for src/ directory structure typical of Next.js)
+          # Potential files
           target_files = [
               'README.md',
               'src/app/page.tsx',
@@ -58,7 +58,7 @@ jobs:
               'src/lib/utils.ts',
               'src/lib/dummy-data.ts',
               'tailwind.config.ts',
-              'next.config.mjs',
+              'next.config.js',
               'package.json',
               'tsconfig.json'
           ]
@@ -74,7 +74,7 @@ jobs:
 
           if not existing_files:
               print('No target files found. Skipping...')
-              with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as f:
                   f.write("changed=false\n")
               exit(0)
 
@@ -109,7 +109,7 @@ jobs:
           
           print(f'Modified {target} with change type: {msg}')
           
-          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as f:
               f.write("changed=true\n")
               f.write(f"msg={msg}\n")
 
@@ -119,7 +119,8 @@ jobs:
         with:
           commit_message: ${{ steps.change.outputs.msg }}
           branch: main
-          commit_user_name: Vheek
+          commit_user_name: vheek10
           commit_user_email: jeremiahvictorgp@gmail.com
           commit_author: vheek10 <jeremiahvictorgp@gmail.com>
           skip_dirty_check: false
+
