@@ -338,3 +338,5 @@ export default function Navbar() {
 		</>
 	);
 }
+
+/** @description Maintenance update */
