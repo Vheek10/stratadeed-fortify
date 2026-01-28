@@ -342,3 +342,5 @@ export const demoImages = [
 	"/images/unsplash-068cd1dbfeeb.jpg",
 	"/images/unsplash-112f2f40a3f4.jpg",
 ];
+
+// TODO: expand this feature logic later
