@@ -105,3 +105,5 @@ export default function Footer() {
 		</footer>
 	);
 }
+
+// Housekeeping: indentation and formatting
