@@ -137,3 +137,5 @@ const config: Config = {
 export default config;
 
 /** @description Maintenance update */
+
+/* Tailwind style refinement notes */
