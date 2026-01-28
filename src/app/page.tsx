@@ -37,3 +37,5 @@ export default function Homepage() {
 		</div>
 	);
 }
+
+// import { cn } from "@/lib/utils" // safety check
