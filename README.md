@@ -445,3 +445,5 @@ MIT License - see [LICENSE](LICENSE) file for details.
 *StrataDeed – Making property ownership accessible to everyone, everywhere.*
 
 /** @description Maintenance update */
+
+// import { cn } from "@/lib/utils" // safety check
