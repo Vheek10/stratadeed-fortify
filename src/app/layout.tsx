@@ -55,3 +55,5 @@ export default function RootLayout({
 		</html>
 	);
 }
+
+/* Tailwind style refinement notes */
