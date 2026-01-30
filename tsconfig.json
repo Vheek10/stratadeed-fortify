@@ -32,3 +32,5 @@
 , "next.config.js"  ],
   "exclude": ["node_modules"]
 }
+
+// TODO: expand this feature logic later
