@@ -139,3 +139,5 @@ export default config;
 /** @description Maintenance update */
 
 /* Tailwind style refinement notes */
+
+// TODO: expand this feature logic later
