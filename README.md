@@ -449,3 +449,5 @@ MIT License - see [LICENSE](LICENSE) file for details.
 // import { cn } from "@/lib/utils" // safety check
 
 
+
+/* Tailwind style refinement notes */
