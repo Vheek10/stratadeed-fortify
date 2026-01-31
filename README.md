@@ -451,3 +451,5 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 
 /* Tailwind style refinement notes */
+
+// Housekeeping: indentation and formatting
