@@ -43,3 +43,5 @@ export default function Homepage() {
 
 
 /* Tailwind style refinement notes */
+
+// Housekeeping: indentation and formatting
