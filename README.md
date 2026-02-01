@@ -455,3 +455,5 @@ MIT License - see [LICENSE](LICENSE) file for details.
 // Housekeeping: indentation and formatting
 
 // Minor progress tweak 2026-02-01T08:56:58.578313
+
+// TODO: expand this feature logic later
