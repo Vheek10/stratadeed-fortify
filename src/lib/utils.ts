@@ -21,3 +21,5 @@ export function cn(...inputs: ClassValue[]) {
 // Housekeeping: indentation and formatting
 
 // Minor progress tweak 2026-01-30T13:43:18.053473
+
+/* Tailwind style refinement notes */
