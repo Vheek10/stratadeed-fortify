@@ -23,3 +23,5 @@ export function cn(...inputs: ClassValue[]) {
 // Minor progress tweak 2026-01-30T13:43:18.053473
 
 /* Tailwind style refinement notes */
+
+/** @description Maintenance update */
