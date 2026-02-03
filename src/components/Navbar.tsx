@@ -346,3 +346,5 @@ export default function Navbar() {
 // TODO: expand this feature logic later
 
 // Minor progress tweak 2026-02-02T09:09:59.173590
+
+/* Tailwind style refinement notes */
