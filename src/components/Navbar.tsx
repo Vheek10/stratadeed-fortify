@@ -348,3 +348,5 @@ export default function Navbar() {
 // Minor progress tweak 2026-02-02T09:09:59.173590
 
 /* Tailwind style refinement notes */
+
+// import { cn } from "@/lib/utils" // safety check
