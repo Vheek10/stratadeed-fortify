@@ -86,3 +86,5 @@ export default nextConfig;
 
 
 
+
+// import { cn } from "@/lib/utils" // safety check
