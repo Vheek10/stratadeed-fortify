@@ -350,3 +350,5 @@ export default function Navbar() {
 /* Tailwind style refinement notes */
 
 // import { cn } from "@/lib/utils" // safety check
+
+// Housekeeping: indentation and formatting
