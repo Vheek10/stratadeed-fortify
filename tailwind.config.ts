@@ -141,3 +141,5 @@ export default config;
 /* Tailwind style refinement notes */
 
 // TODO: expand this feature logic later
+
+// import { cn } from "@/lib/utils" // safety check
