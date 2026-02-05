@@ -352,3 +352,5 @@ export const demoImages = [
 
 
 /* Tailwind style refinement notes */
+
+// Housekeeping: indentation and formatting
