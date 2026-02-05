@@ -107,3 +107,5 @@ export default function Footer() {
 }
 
 // Housekeeping: indentation and formatting
+
+// Minor progress tweak 2026-02-05T09:10:15.114848
