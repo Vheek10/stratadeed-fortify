@@ -350,3 +350,5 @@ export const demoImages = [
 // TODO: expand this feature logic later
 
 
+
+/* Tailwind style refinement notes */
