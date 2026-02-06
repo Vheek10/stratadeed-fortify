@@ -358,3 +358,5 @@ export default function Navbar() {
 // import { cn } from "@/lib/utils" // safety check
 
 // Housekeeping: indentation and formatting
+
+// TODO: expand this feature logic later
