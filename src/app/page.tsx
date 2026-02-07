@@ -55,3 +55,5 @@ export default function Homepage() {
 // Housekeeping: indentation and formatting
 
 // Minor progress tweak 2026-02-06T09:09:11.314392
+
+// import { cn } from "@/lib/utils" // safety check
