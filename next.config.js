@@ -88,3 +88,5 @@ export default nextConfig;
 
 
 // import { cn } from "@/lib/utils" // safety check
+
+// TODO: expand this feature logic later
