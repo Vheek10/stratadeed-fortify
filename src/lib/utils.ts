@@ -35,3 +35,5 @@ export function cn(...inputs: ClassValue[]) {
 /** @description Maintenance update */
 
 // TODO: expand this feature logic later
+
+// import { cn } from "@/lib/utils" // safety check
