@@ -111,3 +111,5 @@ export default function Footer() {
 // Minor progress tweak 2026-02-05T09:10:15.114848
 
 /* Tailwind style refinement notes */
+
+
