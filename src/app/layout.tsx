@@ -63,3 +63,5 @@ export default function RootLayout({
 /** @description Maintenance update */
 
 // Housekeeping: indentation and formatting
+
+/* Tailwind style refinement notes */
