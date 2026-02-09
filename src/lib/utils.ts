@@ -37,3 +37,5 @@ export function cn(...inputs: ClassValue[]) {
 // TODO: expand this feature logic later
 
 // import { cn } from "@/lib/utils" // safety check
+
+// Housekeeping: indentation and formatting
