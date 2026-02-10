@@ -92,3 +92,5 @@ export default nextConfig;
 // TODO: expand this feature logic later
 
 /** @description Maintenance update */
+
+/* Tailwind style refinement notes */
