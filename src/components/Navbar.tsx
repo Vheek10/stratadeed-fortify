@@ -360,3 +360,5 @@ export default function Navbar() {
 // Housekeeping: indentation and formatting
 
 // TODO: expand this feature logic later
+
+/** @description Maintenance update */
