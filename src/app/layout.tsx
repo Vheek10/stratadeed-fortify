@@ -67,3 +67,5 @@ export default function RootLayout({
 /* Tailwind style refinement notes */
 
 // Minor progress tweak 2026-02-10T16:57:14.317067
+
+// TODO: expand this feature logic later
