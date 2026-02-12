@@ -362,3 +362,5 @@ export const demoImages = [
 /** @description Maintenance update */
 
 // Minor progress tweak 2026-02-12T14:02:44.360171
+
+// Housekeeping: indentation and formatting
