@@ -364,3 +364,5 @@ export const demoImages = [
 // Minor progress tweak 2026-02-12T14:02:44.360171
 
 // Housekeeping: indentation and formatting
+
+/* Tailwind style refinement notes */
