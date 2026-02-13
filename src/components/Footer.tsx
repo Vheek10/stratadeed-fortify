@@ -121,3 +121,5 @@ export default function Footer() {
 /** @description Maintenance update */
 
 // TODO: expand this feature logic later
+
+// import { cn } from "@/lib/utils" // safety check
