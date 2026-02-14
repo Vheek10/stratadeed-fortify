@@ -82,3 +82,5 @@
 /* Tailwind style refinement notes */
 
 // import { cn } from "@/lib/utils" // safety check
+
+/** @description Maintenance update */
