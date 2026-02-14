@@ -75,3 +75,5 @@ export default function RootLayout({
 // TODO: expand this feature logic later
 
 /** @description Maintenance update */
+
+/* Tailwind style refinement notes */
