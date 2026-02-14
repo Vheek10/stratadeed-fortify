@@ -366,3 +366,5 @@ export const demoImages = [
 // Housekeeping: indentation and formatting
 
 /* Tailwind style refinement notes */
+
+// Housekeeping: indentation and formatting
