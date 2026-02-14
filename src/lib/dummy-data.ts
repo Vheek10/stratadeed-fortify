@@ -370,3 +370,5 @@ export const demoImages = [
 // Housekeeping: indentation and formatting
 
 // Minor progress tweak 2026-02-14T10:00:45.771554
+
+// TODO: expand this feature logic later
