@@ -368,3 +368,5 @@ export const demoImages = [
 /* Tailwind style refinement notes */
 
 // Housekeeping: indentation and formatting
+
+// Minor progress tweak 2026-02-14T10:00:45.771554
