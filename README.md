@@ -463,3 +463,5 @@ MIT License - see [LICENSE](LICENSE) file for details.
 // Housekeeping: indentation and formatting
 
 /* Tailwind style refinement notes */
+
+// import { cn } from "@/lib/utils" // safety check
